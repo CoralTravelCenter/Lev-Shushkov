@@ -1,0 +1,56 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.stroke {
+	display: flex;
+	flex-wrap: nowrap;
+	align-content: center;
+	overflow: hidden;
+	background: #0093d0;
+	padding: 12px 0;
+}
+
+.stroke__link {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	text-decoration: none;
+	color: #fff;
+}
+
+.stroke_animate {
+	animation: strokeRun infinite both linear 20s;
+}
+
+.stroke__content {
+	width: max-content;
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	padding-right: 20px;
+}
+
+.stroke__ico {
+	margin-right: 10px;
+}
+
+.stroke__text {
+	margin: 0;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 22px;
+	display: flex;
+	align-items: center;
+	text-transform: uppercase;
+	color: #ffffff;
+	width: max-content;
+
+	span {
+		font-weight: 700;
+		margin-right: 5px;
+	}
+}

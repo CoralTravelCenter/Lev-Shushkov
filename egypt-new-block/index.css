@@ -1,0 +1,104 @@
+.wp {
+  width: 1370px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+@media screen and (max-width: 1439px) {
+  .wp {
+    width: calc(100% - 40px);
+  }
+}
+@media screen and (max-width: 1199px) {
+  .wp {
+    width: calc(100% - 40px);
+  }
+}
+@media screen and (max-width: 1006px) {
+  .wp {
+    width: 100%;
+  }
+}
+
+.wp_grid {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 768px) {
+  .wp_grid {
+    gap: unset;
+  }
+}
+
+.flights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 60px 0 60px 0;
+}
+@media screen and (max-width: 768px) {
+  .flights {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 30px 0 30px 0;
+  }
+}
+
+.flights__card {
+  border-radius: 20px;
+  background: #fff;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .flights__card {
+    padding: 30px;
+  }
+}
+
+.flights__logo {
+  max-width: 100%;
+  margin: 0 0 48px 0;
+}
+@media screen and (max-width: 768px) {
+  .flights__logo {
+    max-width: 50%;
+    margin: 0 0 24px 0;
+  }
+}
+
+.flights__text {
+  text-align: center;
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  text-align: center;
+  color: #000000;
+}
+.flights__text strong {
+  font-weight: 900;
+}
+.flights__text:first-of-type {
+  margin: 0 0 24px 0;
+}
+@media screen and (max-width: 768px) {
+  .flights__text {
+    font-size: 10px;
+  }
+  .flights__text:first-of-type {
+    margin: 0 0 12px 0;
+  }
+}
+
+.flights__ico {
+  margin: 0 5px;
+}

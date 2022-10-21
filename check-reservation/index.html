@@ -1,0 +1,39 @@
+<div class="commonModal modal fade" data-backdrop="static" tabindex="-1" role="dialog" style="display: none" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" style="height: 150px; width: 100%">
+		<div class="modal-content"><div class="modal-body h-auto" style="height: 150px; width: 100%"></div></div>
+	</div>
+</div>
+
+<div class="commonModal modal fade show" data-backdrop="static" tabindex="-1" role="dialog" style="display: block; padding-right: 17px" data-modalname="reservationCheckModal">
+	<div class="modal-dialog modal-dialog-centered reservationCheckModalDialog h-auto w-auto" style="height: 150px; width: 100%">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="modal-title">Проверка заявки</div>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="material-icons" aria-hidden="true"></span></button>
+			</div>
+			<div class="modal-body h-auto" style="height: 150px; width: 100%">
+				<form class="formReservationCheck">
+					<div class="row form-group mb-0">
+						<div class="col-12 col-sm-5 position-relative">
+							<label class="inputLabel">Номер заявки</label>
+							<input type="text" class="txtRequestNumber form-control" name="txtRequestNumber" placeholder="Номер заявки" />
+						</div>
+						<div class="col-12 col-sm-5">
+							<label class="inputLabel">Номер документа (без серии)</label>
+							<input type="text" class="txtDocumentNumberWithNoSeries form-control" name="txtDocumentNumberWithNoSeries" placeholder="Номер документа (без серии)" />
+							<a href="#" class="infoFieldTooltip" data-toggle="tooltip" title="" data-original-title="ведите номер документа, который вы указывали при бронировании"> </a>
+						</div>
+						<div class="col-12 col-sm-2">
+							<label class="inputLabel invisible">&nbsp;</label>
+							<button type="button" class="btnReservationCheckFormSubmit btn btn-primary btn-block">Проверить</button>
+						</div>
+
+						<div class="col-12">
+							<div class="reservationCheckInfo"><a class="login" href="#">Войти</a> или <a class="register" href="#">Зарегистрироваться</a>, чтобы видеть все свои заявки, забронированные на сайте <a href="https://www.coral.ru">www.coral.ru</a></div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

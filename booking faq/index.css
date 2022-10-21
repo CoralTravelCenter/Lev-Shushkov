@@ -1,0 +1,220 @@
+.info-popup {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 200;
+}
+
+.info-popup__window {
+  max-width: 1024px;
+  max-height: 80vh;
+  position: relative;
+  margin: auto;
+  background: #fff;
+  overflow: hidden;
+  padding: 40px 15px 40px 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 20px;
+}
+.info-popup__window::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 20px);
+  background: linear-gradient(360deg, #ffffff 35.42%, rgba(255, 255, 255, 0) 100%);
+  height: 80px;
+}
+@media screen and (max-width: 768px) {
+  .info-popup__window {
+    padding: 40px 20px;
+    max-width: calc(100% - 40px);
+  }
+  .info-popup__window .card__download-link {
+    font-size: inherit !important;
+  }
+}
+
+.info-popup_opened {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition: 0.5s;
+}
+
+.info-popup__close-button {
+  position: absolute;
+  background: url(https://cdn.coral.ru/content/cms/russia/useful-information-pages/close-ico.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  top: 20px;
+  right: 20px;
+  border: none;
+  cursor: pointer;
+}
+.info-popup__close-button:focus-visible {
+  outline: none;
+}
+
+.info-popup__text-wrapper {
+  overflow: scroll;
+  padding: 0 55px 0 0;
+}
+.info-popup__text-wrapper::-webkit-scrollbar {
+  background: #dff0fd;
+  width: 5px;
+  height: 0;
+}
+.info-popup__text-wrapper::-webkit-scrollbar-thumb {
+  width: 5px;
+  border-radius: 5px;
+  background: #0093d0;
+}
+
+.info-popup__text .text__title {
+  margin: 0 0 25px 0;
+}
+.info-popup__text li {
+  margin: 0 0 5px 0;
+}
+
+.text {
+  line-height: 1.2;
+  font-style: normal;
+  color: #000;
+  font-weight: 400;
+  margin: 0 0 60px 0;
+}
+
+.text__title {
+  font-size: 20px;
+  margin: 0 0 25px 0;
+  font-weight: 700;
+}
+.text__title:first-of-type {
+  margin: 0;
+}
+
+.slide_mobile .text__title {
+  margin: 0 auto 60px auto !important;
+  text-align: center;
+  max-width: 90%;
+}
+@media screen and (max-width: 499px) {
+  .slide_mobile .text__title {
+    margin: 0 auto 30px auto !important;
+  }
+}
+
+.text__main {
+  font-size: 16px;
+  margin: 0 0 20px 0;
+  font-weight: 400;
+}
+.text__main span {
+  font-weight: 800;
+}
+.text__main:last-of-type {
+  margin: 0;
+}
+#info-avia .text__main {
+  font-size: 14px;
+}
+.gos .text__main {
+  margin: 0;
+}
+
+.card__download-link {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px !important;
+  color: #0093d0 !important;
+  cursor: pointer;
+}
+@media screen and (max-width: 499px) {
+  .card__download-link {
+    font-size: 10px !important;
+    white-space: nowrap;
+  }
+}
+
+p,
+a {
+  font-family: "Rubik", Arial, sans-serif;
+}
+
+.info-popup {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.info-popup__window {
+  max-width: 750px;
+  height: 50vh;
+}
+
+.insurance-faq {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  -moz-column-gap: 16px;
+       column-gap: 16px;
+  margin-bottom: 20px;
+}
+@media screen and (max-width: 1199px) {
+  .insurance-faq {
+    grid-template-columns: 1fr;
+  }
+}
+
+.insurance-faq__btn {
+  cursor: pointer;
+  display: flex;
+  background: #f5f5f5;
+  padding: 13px 10px;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+  position: relative;
+}
+.insurance-faq__btn span,
+.insurance-faq__btn a {
+  color: #000 !important;
+  margin-right: unset;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  text-transform: none !important;
+  width: 100%;
+  padding: 0 30px;
+}
+.insurance-faq__btn img {
+  align-self: unset !important;
+  width: 22px !important;
+  height: 22px !important;
+  -o-object-fit: contain;
+     object-fit: contain;
+  pointer-events: none;
+  position: absolute;
+  right: 10px;
+}
+
+.insurance-faq__ico {
+  left: 10px;
+}

@@ -1,0 +1,17 @@
+@import "../../Useful-Information/styles/blocks/desktop.scss";
+@import "../../Useful-Information/styles/blocks/mobile.scss";
+
+.business-class-banner {
+	margin-bottom: 2rem;
+}
+.business-class-color {
+	color: #f0ab00;
+}
+
+.business-class-mobile::before {
+	content: "Бизнес-класс ";
+	color: #f0ab00;
+}
+.economy-class-mobile::before {
+	content: "Эконом класс ";
+}

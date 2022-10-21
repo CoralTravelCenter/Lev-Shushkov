@@ -1,0 +1,72 @@
+// на страницах выбора перелетов и допуслуг меняется стиль таймера и текст
+
+
+document.querySelector("head").insertAdjacentHTML(
+	"beforeend",
+	`
+<style>
+.timer-col {
+    padding-right: 4px !important;
+  }
+  @media screen and (max-width: 575px) {
+    .timer-col {
+      padding: 0 !important;
+    }
+  }
+  
+  .countdownTimer {
+    width: 100% !important;
+    margin: 0 !important;
+    top: 0 !important;
+    padding: 9px 14px !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+  }
+  @media screen and (max-width: 1439px) {
+    .countdownTimer {
+      display: flex;
+      align-items: center;
+    }
+    .countdownTimer .minutes,
+  .countdownTimer .seconds {
+      padding: 0 !important;
+    }
+    .countdownTimer div {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      min-width: unset !important;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .countdownTimer {
+      padding: 9px !important;
+    }
+  }
+  .countdownTimer .lbl {
+    margin-right: 60px;
+  }
+  @media screen and (max-width: 1439px) {
+    .countdownTimer .lbl {
+      margin-right: 0;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .pageTitle {
+      margin-left: 0 !important;
+    }
+  }
+</style>`
+);
+
+const timer = document.querySelector(".countdownTimer");
+const timerText = timer.querySelector(".lbl");
+const selectedHotelContainer = document.querySelector(".selectedHotelPartial");
+if (selectedHotelContainer) {
+	const titleRow = selectedHotelContainer.querySelector(".title-row");
+	titleRow.style.marginBottom = "20px";
+}
+
+timerText.textContent = "Цена действительна";

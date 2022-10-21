@@ -1,0 +1,52 @@
+.timer-col {
+	padding-right: 4px !important;
+
+	@media screen and (max-width: 575px) {
+		padding: 0 !important;
+	}
+}
+
+.countdownTimer {
+	width: 100% !important;
+	margin: 0 !important;
+	top: 0 !important;
+	padding: 9px 14px !important;
+	border-radius: 4px !important;
+	box-shadow: none !important;
+
+	@media screen and (max-width: 1439px) {
+		display: flex;
+		align-items: center;
+
+		.minutes,
+		.seconds {
+			padding: 0 !important;
+		}
+
+		div {
+			display: flex !important;
+			align-items: center;
+			justify-content: center;
+			gap: 3px;
+			min-width: unset !important;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		padding: 9px !important;
+	}
+
+	.lbl {
+		margin-right: 60px;
+
+		@media screen and (max-width: 1439px) {
+			margin-right: 0;
+		}
+	}
+}
+
+.pageTitle {
+	@media screen and (max-width: 768px) {
+		margin-left: 0 !important;
+	}
+}

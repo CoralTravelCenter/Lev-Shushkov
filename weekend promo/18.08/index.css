@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color: gray;
+}
+
+.desktop {
+  display: initial;
+}
+@media screen and (max-width: 768px) {
+  .desktop {
+    display: none;
+  }
+}
+
+.mobile {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .mobile {
+    display: initial;
+  }
+}
+
+.weekend-promo__overlay {
+  z-index: 11;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.weekend-promo__overlay_active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition: 0.3s;
+}
+
+.weekend-promo__close-button {
+  position: absolute;
+  top: -50px;
+  right: -30px;
+  color: #fff;
+  font-size: 60px;
+  cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .weekend-promo__close-button {
+    right: -5px;
+    top: -60px;
+  }
+}
+
+.weekend-promo__content-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 32px;
+}
+@media screen and (max-width: 1439px) {
+  .weekend-promo__content-wrapper {
+    max-width: calc(100% - 100px);
+  }
+}
+@media screen and (max-width: 768px) {
+  .weekend-promo__content-wrapper {
+    max-height: calc(100% - 40px);
+    max-width: calc(100% - 20px);
+  }
+}
+
+.weekend-promo__link {
+  display: inherit;
+  text-decoration: none;
+  color: #000;
+}
+@media screen and (max-width: 1006px) {
+  .weekend-promo__link {
+    flex-direction: column-reverse;
+  }
+}
+
+.weekend-promo__text-wrapper {
+  margin: 35px 60px 35px 45px;
+}
+@media screen and (max-width: 1006px) {
+  .weekend-promo__text-wrapper {
+    margin: 20px 30px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .weekend-promo__text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+}
+
+.weekend-promo__title {
+  max-width: 96%;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1.2;
+  color: #000000;
+  margin: 0 0 20px 0;
+}
+.weekend-promo__title span {
+  color: #d8242a;
+}
+@media screen and (max-width: 1006px) {
+  .weekend-promo__title {
+    font-size: 30px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .weekend-promo__title {
+    max-width: 100%;
+    font-size: 22px;
+    text-align: center;
+  }
+}
+
+.weekend-promo__description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #000000;
+  margin: 0 0 30px 0;
+}
+.weekend-promo__description span {
+  font-weight: 900;
+}
+@media screen and (max-width: 1006px) {
+  .weekend-promo__description {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .weekend-promo__description {
+    text-align: center;
+    font-size: 12px;
+  }
+}
+
+.weekend-promo__button {
+  margin: 0 0 30px 0;
+  background: #d8242a;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  border: none;
+  padding: 13px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.weekend-promo__button:hover {
+  background: #be161b;
+  transition: 0.3s;
+}
+@media screen and (max-width: 1006px) {
+  .weekend-promo__button {
+    padding: 12px 26px;
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .weekend-promo__button {
+    padding: 6px 13px;
+    font-size: 12px;
+  }
+}
+
+.weekend-promo__legal {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #000000;
+}
+@media screen and (max-width: 768px) {
+  .weekend-promo__legal {
+    font-size: 9px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .weekend-promo__legal {
+    font-size: 7px;
+  }
+}
+
+.weekend-promo__image {
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 32px;
+  max-width: 50%;
+}
+@media screen and (max-width: 1006px) {
+  .weekend-promo__image {
+    max-width: 100%;
+    max-height: 300px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .weekend-promo__image {
+    max-height: 250px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .weekend-promo__image {
+    max-height: 180px;
+  }
+}

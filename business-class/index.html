@@ -1,0 +1,38 @@
+<style>
+	@charset "UTF-8";
+	@media screen and (max-width: 768px) {
+		.desktop {
+			display: none !important;
+		}
+	}
+
+	.mobile {
+		width: 100%;
+	}
+	@media screen and (min-width: 769px) {
+		.mobile {
+			display: none !important;
+		}
+	}
+
+	.business-class-banner {
+		margin-bottom: 2rem;
+	}
+
+	.business-class-color {
+		color: #f0ab00;
+	}
+
+	.business-class-mobile::before {
+		content: "Бизнес-класс ";
+		color: #f0ab00;
+	}
+
+	.economy-class-mobile::before {
+		content: "Эконом класс ";
+	}
+</style>
+<div class="business-class-banner">
+	<img class="desktop" src="https://cdn.coral.ru/content/cms/russia/insider-bclass-banner/banner.png" alt="Бизнес-класс доступен, как никогда" />
+	<img class="mobile" src="https://cdn.coral.ru/content/cms/russia/insider-bclass-banner/banner_mobile.png" alt="Бизнес-класс доступен, как никогда" />
+</div>

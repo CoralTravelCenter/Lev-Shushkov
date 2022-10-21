@@ -1,0 +1,2489 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<style type="text/css">
+			.reset {
+				position: static;
+				left: auto;
+				top: auto;
+				right: auto;
+				bottom: auto;
+				width: auto;
+				height: auto;
+				margin: 0;
+				padding: 0;
+				-webkit-transform: none;
+				-moz-transform: none;
+				-ms-transform: none;
+				-o-transform: none;
+				transform: none;
+				background: none;
+			}
+			.bbox,
+			.bbox * {
+				box-sizing: border-box;
+			}
+			.interactive {
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			.interactive:active {
+				-webkit-transform: translateY(2px);
+				-moz-transform: translateY(2px);
+				-ms-transform: translateY(2px);
+				-o-transform: translateY(2px);
+				transform: translateY(2px);
+			}
+			.abs100x100 {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+			.centering {
+				display: table !important;
+				width: 100%;
+				height: 100%;
+			}
+			.centering > *:first-child {
+				width: 100%;
+				height: 100%;
+				display: table-cell;
+				text-align: center;
+				vertical-align: middle;
+			}
+			.centering > *:first-child > *:first-child {
+				display: inline-block;
+			}
+			@media screen and (max-width: 768px) {
+				.hidden-on-mobile {
+					display: none !important;
+				}
+			}
+			@media screen and (min-width: 769px) {
+				.hidden-on-desktop {
+					display: none !important;
+				}
+			}
+			.rur:not(:empty):after {
+				content: " \20BD ";
+			}
+			.flex-center {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			#site-wrap,
+			#site-wrap * {
+				box-sizing: border-box;
+			}
+			#site-wrap section + section {
+				margin-top: 3%;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section + section {
+					margin-top: 6%;
+				}
+			}
+			#site-wrap section > .contenu {
+				max-width: 1370px;
+				margin: auto;
+				padding: 1rem;
+				font-size: 1.1vw;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			@media screen and (max-width: 1440px) {
+				#site-wrap section > .contenu {
+					max-width: 1130px;
+				}
+			}
+			@media screen and (min-width: 1440px) {
+				#site-wrap section > .contenu {
+					font-size: 15.84px;
+				}
+			}
+			#site-wrap section > .contenu > * {
+				max-width: 100%;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section > .contenu {
+					font-size: 1.2em;
+				}
+			}
+			@media screen and (max-width: 576px) {
+				#site-wrap section > .contenu {
+					font-size: 1.3em;
+				}
+			}
+			#site-wrap section > .contenu h2 {
+				text-align: center;
+				margin-bottom: 1em;
+				font-size: 3em;
+				max-width: 20em;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section > .contenu h2 {
+					font-size: 2.6em;
+					padding: 0 0.5em;
+				}
+			}
+			@media screen and (max-width: 576px) {
+				#site-wrap section > .contenu h2 {
+					font-size: 2em;
+				}
+			}
+			#site-wrap section > .contenu h3 {
+				text-align: center;
+				font-size: 2em;
+			}
+			#site-wrap section > .contenu ul li:before,
+			#site-wrap section > .contenu ul li:after {
+				display: none;
+			}
+			#site-wrap section > .contenu .buttonlike {
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				line-height: 1;
+				font-size: inherit;
+				height: 2.6em;
+				padding: 0 2em;
+				border: 0;
+				text-decoration: none;
+				border-radius: 0.25em;
+			}
+			#site-wrap section > .contenu .buttonlike:active {
+				-webkit-transform: translateY(2px);
+				-moz-transform: translateY(2px);
+				-ms-transform: translateY(2px);
+				-o-transform: translateY(2px);
+				transform: translateY(2px);
+			}
+			#site-wrap section > .contenu .buttonlike.transparent {
+				color: inherit;
+				border: 1px solid currentColor;
+			}
+			#site-wrap section > .contenu .buttonlike.yellow {
+				color: white;
+				background-color: #f0ab00;
+			}
+			#site-wrap section > .contenu .buttonlike.blue {
+				color: white;
+				background-color: #0093d0;
+			}
+			#site-wrap section > .contenu .buttonlike.deepblue {
+				color: white;
+				background-color: #0f2855;
+			}
+			#site-wrap section > .contenu .buttonlike.red {
+				color: white;
+				background-color: #d7232a;
+			}
+			body .contentLayout-BaseContainer {
+				max-width: 100%;
+				overflow: hidden;
+			}
+			body .contentLayout-BaseContainer .notcritical {
+				padding: 0 !important;
+			}
+			body .contentLayout-BaseContainer .notcritical > .container {
+				margin: 0 !important;
+				padding: 0 !important;
+				max-width: none !important;
+			}
+			body .contentLayout-BaseContainer .notcritical > .container .widgetcontainer {
+				margin-bottom: 0;
+			}
+			body .contentLayout-BaseContainer .notcritical > .container > .row:not(:nth-child(2)) {
+				display: none;
+			}
+			body > div.contentLayout-BaseContainer > div.notcritical > div > div:nth-child(2) > div.col-sm-12.order-1.col-md-9.rightcol > h1 {
+				display: none;
+			}
+			#site-wrap section > .contenu > p {
+				font-weight: normal;
+			}
+			#site-wrap section > .contenu .actions {
+				display: flex;
+				justify-content: center;
+				margin-top: 2em;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section.intro {
+					padding-top: 0;
+				}
+			}
+			#site-wrap section.intro > .contenu {
+				padding: 0;
+				position: relative;
+				background: url(//cdn.sunmar.ru/content/cms/russia/egypt-main/banner.png) center no-repeat;
+				background-size: cover;
+				border-radius: 1em;
+			}
+			#site-wrap section.intro > .contenu:before {
+				content: "";
+				display: block;
+				padding-top: 32.49635036%;
+			}
+			#site-wrap section.intro > .contenu > * {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section.intro > .contenu {
+					position: relative;
+					border-radius: 0;
+					background-image: url(//cdn.sunmar.ru/content/cms/russia/egypt-main/banner_mobile.png);
+				}
+				#site-wrap section.intro > .contenu:before {
+					content: "";
+					display: block;
+					padding-top: 136.11111111%;
+				}
+				#site-wrap section.intro > .contenu > * {
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+				}
+			}
+			#site-wrap section.business-class > .contenu {
+				padding: 0;
+				position: relative;
+				background: url(//cdn.sunmar.ru/content/cms/russia/egypt-main/business-class.jpg) center no-repeat;
+				background-size: cover;
+				border-radius: 1em;
+			}
+			#site-wrap section.business-class > .contenu:before {
+				content: "";
+				display: block;
+				padding-top: 33.756204%;
+			}
+			#site-wrap section.business-class > .contenu > * {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section.business-class > .contenu {
+					position: relative;
+					border-radius: 0;
+					background-image: url(//cdn.sunmar.ru/content/cms/russia/egypt-main/business-class_mobile.jpg);
+				}
+				#site-wrap section.business-class > .contenu:before {
+					content: "";
+					display: block;
+					padding-top: 109.75%;
+				}
+				#site-wrap section.business-class > .contenu > * {
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+				}
+			}
+			#site-wrap section.five-reasons > .contenu .reasons {
+				display: flex;
+				justify-content: center;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section.five-reasons > .contenu .reasons {
+					flex-wrap: wrap;
+				}
+			}
+			#site-wrap section.five-reasons > .contenu .reasons .reason {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+				padding: 2em;
+				font-size: 1.2em;
+			}
+			#site-wrap section.five-reasons > .contenu .reasons .reason > * {
+				max-width: 100%;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section.five-reasons > .contenu .reasons .reason {
+					flex: 1 1 30%;
+				}
+			}
+			#site-wrap section.five-reasons > .contenu .reasons .reason .icon {
+				position: relative;
+				width: 4em;
+				max-width: 118px;
+				background: center no-repeat;
+				background-size: contain;
+			}
+			#site-wrap section.five-reasons > .contenu .reasons .reason .icon:before {
+				content: "";
+				display: block;
+				padding-top: 81.3559322%;
+			}
+			#site-wrap section.five-reasons > .contenu .reasons .reason .icon > * {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+			#site-wrap section.five-reasons > .contenu .reasons .reason p {
+				margin: 1em auto 0;
+				line-height: 1.1;
+			}
+			#site-wrap section.cities-and-resorts .resorts {
+				width: 100%;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort {
+				flex: 1 1 30%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding: 2em 1em;
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort > * {
+				max-width: 100%;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section.cities-and-resorts .resorts > .resort {
+					flex: 1 1 45%;
+				}
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort .visual {
+				position: relative;
+				width: 100%;
+				background: center no-repeat;
+				background-size: cover;
+				border-radius: 1em;
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort .visual:before {
+				content: "";
+				display: block;
+				padding-top: 56.25%;
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort .visual > * {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort h4.name {
+				font-size: 1.5em;
+				margin-top: 1em;
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort .features {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				font-size: 75%;
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort .features > * {
+				flex: 0 1 30%;
+				display: flex;
+				align-items: center;
+				padding: 1em;
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort .features > *:before {
+				content: "";
+				width: 4em;
+				height: 2.5em;
+				background: right center no-repeat;
+				background-size: contain;
+				margin-right: 0.5em;
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort .features > *.beach:before {
+				background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzMiIHZpZXdCb3g9IjAgMCAzOCAzMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzcuMjY2MiAzMS4wNDA0QzM3LjE1NjUgMzAuODAwMiAzNi45NjA3IDMwLjYxNjMgMzYuNzE0NSAzMC41MjQzQzM0LjkzNzcgMjkuODUzOSAzMi45MTQ3IDI5LjI5MDMgMzAuNzA3OCAyOC44NTEzTDI4LjA4NTYgMjUuMTM3NkMyOC4wNTYgMjUuMDk2IDI4LjAyNjMgMjUuMDY2NCAyOC4wMDI2IDI1LjA0ODZDMjcuOTY3IDI1LjAxIDI3LjkyODQgMjQuOTc0NCAyNy44ODM5IDI0LjkzODhDMjcuODM2NSAyNC45MDAzIDI3Ljc4OSAyNC44Njc2IDI3LjczMjcgMjQuODM4QzI3LjY3NjMgMjQuODA4MyAyNy42MTk5IDI0Ljc4NzYgMjcuNTYwNiAyNC43Njk4QzI3LjUwMTMgMjQuNzUyIDI3LjQ0NDkgMjQuNzQwMSAyNy4zOTQ1IDI0LjczNDJMMjcuMzM4MSAyNC43MTkzSDE3LjgxMzVMMTQuNzQwNCAxMS43MjQyTDIwLjA1NiAxMC40NjY1QzIxLjI0NTUgMTIuMDc3MSAyMy4xMDUzIDEzLjAyNjMgMjUuMDk1NyAxMy4wMjYzQzI4LjU2OTEgMTMuMDI2MyAzMS4zOTMgMTAuMjAyNSAzMS4zOTMgNi43Mjg5N0MzMS4zOTMgMy4yNTU0OCAyOC41NjkxIDAuNDM0NTcgMjUuMDk4NiAwLjQzNDU3QzIzLjEzMiAwLjQzNDU3IDIxLjI4OTkgMS4zNjAwNCAyMC4wOTc1IDIuOTI5MTlDMTcuNTg4MSAxLjYwNjI0IDE0LjQ1NTcgMS4yNTkxOSAxMS40MjQyIDEuOTc3MDJDOC41MjYxMyAyLjY2MjIzIDYuMDA3NzggNC4yMTk1MiA0LjMzNDgxIDYuMzY3MDlDMi42MTE0MSA4LjU3Njk1IDEuOTgyNTcgMTEuMTQyOCAyLjU2MDk5IDEzLjU4OTlDMi42NjQ4IDE0LjAzNzggMy4wNjIyOCAxNC4zNDkzIDMuNTIyMDUgMTQuMzQ5M0MzLjYwMjE0IDE0LjM0OTMgMy42NzkyNyAxNC4zNDA0IDMuNzUwNDYgMTQuMzIyNkwxMi44MjQyIDEyLjE3OEwxNS43OTA1IDI0LjcxOTNIMTMuNjI1MUMxMy43MDgyIDI0LjY3NzggMTMuNzg4MyAyNC42MzAzIDEzLjg1NjUgMjQuNTY4MUMxNC4wNTIzIDI0LjM5MDEgMTQuMTY4IDI0LjE0OTggMTQuMTgyOCAyMy44ODU4QzE0LjE5NzYgMjMuNjIxOCAxNC4xMDg2IDIzLjM2NjcgMTMuOTMwNyAyMy4xNzM5TDEyLjAwMjYgMjEuMDMyM0MxMS42Mzc3IDIwLjYyODkgMTEuMDExOSAyMC41OTYyIDEwLjYwODQgMjAuOTU4MUMxMC4yMDUgMjEuMzIzIDEwLjE3MjQgMjEuOTQ4OCAxMC41MzQzIDIyLjM1MjNMMTIuNDYyNCAyNC40OTM5QzEyLjU0ODQgMjQuNTg4OCAxMi42NTIyIDI0LjY2MyAxMi43NjQ5IDI0LjcxOTNIMTIuNjA3N0w3LjEyNjA2IDE4LjYyNjZDNi43NjEyMSAxOC4yMjAzIDYuMTM1MzMgMTguMTg3NiA1LjczMTkyIDE4LjU1MjVDNS41MzYxNCAxOC43MzA1IDUuNDIwNDYgMTguOTcwNyA1LjQwNTYzIDE5LjIzNDdDNS4zOTA4IDE5LjQ5ODcgNS40ODI3NSAxOS43NTA4IDUuNjU3NzYgMTkuOTQ2NkwxMC45MDggMjUuNzgxM0w4Ljk1MDMxIDI4LjU1MTdDNi4wODc4NyAyOS4wMjM0IDMuNTEzMTUgMjkuNjg3OCAxLjI5NDM5IDMwLjUyMTNDMS4wNDgxOSAzMC42MTMzIDAuODQ5NDU0IDMwLjc5NzIgMC43NDI2NjkgMzEuMDM3NUMwLjYzMjkxNyAzMS4yNzc3IDAuNjI0MDE5IDMxLjU0NDcgMC43MTg5MzkgMzEuNzkzOUMwLjgxMDg5MyAzMi4wNDAxIDAuOTk0ODAxIDMyLjIzNTggMS4yMzUwNyAzMi4zNDU2QzEuMzY1NTggMzIuNDA0OSAxLjUwNSAzMi40MzQ2IDEuNjQxNDUgMzIuNDM0NkMxLjc2MDEgMzIuNDM0NiAxLjg3NTc4IDMyLjQxMzggMS45OTE0NiAzMi4zNjkzQzExLjM3MzcgMjguODMzNSAyNi42NDExIDI4LjgzMzUgMzYuMDI2MyAzMi4zNjkzQzM2LjEzOSAzMi40MTA4IDM2LjI1NDcgMzIuNDMxNiAzNi4zNzM0IDMyLjQzMTZDMzYuNzc5OCAzMi40MzE2IDM3LjE1MzUgMzIuMTczNSAzNy4yOTg4IDMxLjc5MDlDMzcuMzkwOCAzMS41NDQ3IDM3LjM4MTkgMzEuMjc0OCAzNy4yNzUxIDMxLjAzNDVMMzcuMjY2MiAzMS4wNDA0Wk0xNi41MTQzIDI3LjgwNzJDMTQuODQ3MiAyNy44Njk1IDEzLjIwOTkgMjcuOTk0MSAxMS42Mjg4IDI4LjE3NUwxMi42NzMgMjYuNjk0OUgxNi4yNTAzTDE2LjUxNDMgMjcuODA3MlpNMjcuOTU4MSAyOC4zODI3QzI1LjEwNzUgMjcuOTczMyAyMi4wNDA0IDI3Ljc1OTcgMTguOTg1MiAyNy43NTk3QzE4LjgzMzkgMjcuNzU5NyAxOC42ODI2IDI3Ljc1OTcgMTguNTM0MyAyNy43NTk3TDE4LjI4MjIgMjYuNjkxOUgyNi43NjU3TDI3Ljk1ODEgMjguMzc5N1YyOC4zODI3Wk0yMy44MTQyIDkuNTc5NTVDMjQuMDY5MyA5LjUyMDIyIDI0LjI4ODggOS4zNjMwMSAyNC40MjgyIDkuMTM3NTdDMjQuNTY3NyA4LjkxNTEgMjQuNjA5MiA4LjY0ODE0IDI0LjU0OTkgOC4zOTAwOEMyNC4xNDY1IDYuNjkwNDEgMjMuMTg1NCA1LjE4NjUyIDIxLjc1MjcgNC4wMTQ4NEMyMi41NzE0IDMuMDAzMzUgMjMuNzkzNSAyLjQxMDEgMjUuMDk4NiAyLjQxMDFDMjcuNDgwNSAyLjQxMDEgMjkuNDIwNSA0LjM1MDAzIDI5LjQyMDUgNi43MzE5NEMyOS40MjA1IDkuMTEzODQgMjcuNDgwNSAxMS4wNTM4IDI1LjA5ODYgMTEuMDUzOEMyNC4wMzk3IDExLjA1MzggMjMuMDM0MSAxMC42NTkzIDIyLjI1MSA5Ljk1MDMzTDIzLjgxNDIgOS41Nzk1NVpNMTUuNjYgMy42MzUxNkMxOC43NTk3IDMuOTQ2NjIgMjEuMzEwNyA1LjU2OTE2IDIyLjMxNjMgNy45MDM2MUwxOC40ODA5IDguODExMjlDMTcuOTA1NCA2Ljg4OTE1IDE3LjAxMjYgNS4xNzQ2NSAxNS45NDE4IDMuOTQwNjlDMTUuODQ5OCAzLjgzNjg3IDE1Ljc1NzkgMy43MzMwNSAxNS42NjMgMy42MzUxNkgxNS42NlpNMTIuMTkyNCAzLjg2MDZDMTIuODc3NiAzLjg2MDYgMTMuNjc4NSA0LjM1MDAzIDE0LjQ0NjggNS4yMzM5OEMxNS4zMjE4IDYuMjQyNTEgMTYuMDYzNCA3LjY2MDM4IDE2LjU1NTggOS4yNjIxNkwxMC4wOTIzIDEwLjc4OThDOS44MTY0NSA5LjEzNzU3IDkuODQzMTUgNy41Mzg3NiAxMC4xNzU0IDYuMjQyNTFDMTAuNTE5NSA0LjkwNzY5IDExLjEyMTYgNC4wNzEyIDExLjg3NSAzLjg5MzIzQzExLjk3MjkgMy44Njk1IDEyLjA3OTcgMy44NTc2MyAxMi4xODk1IDMuODU3NjNMMTIuMTkyNCAzLjg2MDZaTTguMTczMTUgMTEuMjQ2Nkw0LjMzNDgxIDEyLjE1NDNDNC4yNDI4NSAxMC41OTk5IDQuNzg1NjggOC45OTUxOSA1Ljg4OTEzIDcuNTgwMjlDNi41NTA2IDYuNzMxOTQgNy4zOTU5OSA1Ljk3ODUxIDguMzc0ODUgNS4zNjE1M0M4LjMzMzMzIDUuNDkyMDQgOC4yOTc3MyA1LjYyMjU2IDguMjYyMTQgNS43NTYwNEM3Ljg1NTc2IDcuMzM3MDUgNy44MjYxIDkuMjcxMDYgOC4xNzMxNSAxMS4yNDY2WiIgZmlsbD0iIzFGMUQyMSIvPjwvc3ZnPgo=);
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort .features > *.air:before {
+				background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDYiIGhlaWdodD0iMzMiIHZpZXdCb3g9IjAgMCA0NiAzMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNy41NTI3OSA5LjI3MTg1SDI1LjI3MDZDMjUuODc0NyA5LjI3MTg1IDI2LjM2NjMgOC43ODAzMSAyNi4zNjYzIDguMTc2MjFDMjYuMzY2MyA3LjU3MjEgMjUuODc0NyA3LjA4MDU3IDI1LjI3MDYgNy4wODA1N0g3LjU1Mjc5QzYuOTQ4NjkgNy4wODA1NyA2LjQ1NzE1IDcuNTcyMSA2LjQ1NzE1IDguMTc2MjFDNi40NTcxNSA4Ljc4MDMxIDYuOTQ4NjkgOS4yNzE4NSA3LjU1Mjc5IDkuMjcxODVaIiBmaWxsPSIjMjMxRjIwIi8+PHBhdGggZD0iTTMyLjQwMzUgMTIuNTE3MUgxLjQ0NzkzQzAuODQzODMyIDEyLjUxNzEgMC4zNTIyOTUgMTMuMDA4NiAwLjM1MjI5NSAxMy42MTI3QzAuMzUyMjk1IDE0LjIxNjggMC44NDM4MzIgMTQuNzA4NCAxLjQ0NzkzIDE0LjcwODRIMzIuNDAzNUMzMy4wMDc2IDE0LjcwODQgMzMuNDk5MiAxNC4yMTY4IDMzLjQ5OTIgMTMuNjEyN0MzMy40OTkyIDEzLjAwODYgMzMuMDA3NiAxMi41MTcxIDMyLjQwMzUgMTIuNTE3MVoiIGZpbGw9IiMyMzFGMjAiLz48cGF0aCBkPSJNOC43NzIxNSAyMS44ODY3QzguMTY4MDUgMjEuODg2NyA3LjY3NjUxIDIyLjM3ODMgNy42NzY1MSAyMi45ODI0QzcuNjc2NTEgMjMuNTg2NSA4LjE2ODA1IDI0LjA3OCA4Ljc3MjE1IDI0LjA3OEgxOC44ODQzQzE5LjQ4ODQgMjQuMDc4IDE5Ljk3OTkgMjMuNTg2NSAxOS45Nzk5IDIyLjk4MjRDMTkuOTc5OSAyMi4zNzgzIDE5LjQ4ODQgMjEuODg2NyAxOC44ODQzIDIxLjg4NjdIOC43NzIxNVoiIGZpbGw9IiMyMzFGMjAiLz48cGF0aCBkPSJNMTguOTQ4MiAyOC45NzhDMTguOTQ4MiAyOC4zNzM5IDE4LjQ1NjYgMjcuODgyMyAxNy44NTI1IDI3Ljg4MjNIMS40NDc5M0MwLjg0MzgzMiAyNy44ODIzIDAuMzUyMjk1IDI4LjM3MzkgMC4zNTIyOTUgMjguOTc4QzAuMzUyMjk1IDI5LjU4MjEgMC44NDM4MzIgMzAuMDczNiAxLjQ0NzkzIDMwLjA3MzZIMTcuODUyNUMxOC40NTY2IDMwLjA3MzYgMTguOTQ4MiAyOS41ODIxIDE4Ljk0ODIgMjguOTc4WiIgZmlsbD0iIzIzMUYyMCIvPjxwYXRoIGQ9Ik0zOS45Mzc5IDExLjAxNjRDNDAuMDUwNCAxMC41Mzk5IDQwLjExMDUgMTAuMDUyMSA0MC4xMTA1IDkuNTYwNThDNDAuMTEwNSA2LjEwODU3IDM3LjMwMDEgMy4yOTgxOCAzMy44NDQzIDMuMjk4MThDMzIuOTk2MyAzLjI5ODE4IDMyLjE0ODMgMy40NzQ1MyAzMS4zNzE2IDMuODA4NDdDMzAuNzYgMS41NzU5MiAyOC43MzAxIDAgMjYuMzczNyAwQzI0LjYzNjQgMCAyMy4wMjMgMC44NjMwMDQgMjIuMDU4NyAyLjMxMTM1QzIxLjcyNDcgMi44MTQxNCAyMS44NTk4IDMuNDk3MDQgMjIuMzYyNiAzLjgzNDc0QzIyLjg2NTQgNC4xNjg2OCAyMy41NDgzIDQuMDMzNjEgMjMuODgyMiAzLjUzMDgxQzI0LjQzNzYgMi42OTc4MyAyNS4zNjgxIDIuMTk4NzggMjYuMzY5OSAyLjE5ODc4QzI4LjAxNzIgMi4xOTg3OCAyOS4zNTY3IDMuNTM4MzIgMjkuMzU2NyA1LjE4NTUzQzI5LjM1NjcgNS4zMTMxIDI5LjM0OTIgNS40NDA2OCAyOS4zMzQyIDUuNTYwNzVDMjkuMjc3OSA2LjAxMTAxIDI5LjUxMDUgNi40NTM3NyAyOS45MTIgNi42NjM4OUMzMC4zMTM1IDYuODc0MDIgMzAuODA4OCA2LjgxMzk4IDMxLjE1MDIgNi41MTM4QzMxLjg4OTQgNS44NTcxNyAzMi44NDYyIDUuNDk2OTYgMzMuODM2OCA1LjQ5Njk2QzM2LjA4MDYgNS40OTY5NiAzNy45MDc5IDcuMzIwNTMgMzcuOTA3OSA5LjU2NDM0QzM3LjkwNzkgMTAuMjIxIDM3Ljc1MDMgMTAuODY2MyAzNy40NTAyIDExLjQzNjdDMzcuMjczOCAxMS43NzQ0IDM3LjI4NTEgMTIuMTg3MSAzNy40ODAyIDEyLjUxMzZDMzcuNjc1MyAxMi44NCAzOC4wMzU1IDEzLjA0MjYgMzguNDE0NSAxMy4wNDY0QzQxLjAyNiAxMy4wNTc2IDQzLjE1MzUgMTUuMTk2NCA0My4xNTM1IDE3LjgwNzlDNDMuMTUzNSAyMC40MTk0IDQxLjAxODUgMjIuNTY5NCAzOC4zOTIgMjIuNTY5NEMzNy40ODc3IDIyLjU2OTQgMzYuNjA1OSAyMi4zMTQzIDM1Ljg0OCAyMS44MzRDMzUuNjAwMyAyMS42NzY0IDM1LjMwNzcgMjEuNjIzOSAzNS4wMjI1IDIxLjY4NzdDMzQuNzM3MyAyMS43NTE1IDM0LjQ5MzQgMjEuOTI0MSAzNC4zMzU4IDIyLjE3MTdDMzQuMTc4MyAyMi40MTkzIDM0LjEyOTUgMjIuNzEyIDM0LjE5MzMgMjIuOTk3MkMzNC4yNTcgMjMuMjgyNCAzNC40Mjk3IDIzLjUyNjIgMzQuNjc3MyAyMy42ODM4QzM1Ljc4NzkgMjQuMzg5MiAzNy4wNzQ5IDI0Ljc2MDcgMzguMzk1NyAyNC43NjA3QzQyLjIzMDUgMjQuNzYwNyA0NS4zNTIzIDIxLjYzODkgNDUuMzUyMyAxNy44MDQxQzQ1LjM1MjMgMTQuNTIxIDQzLjA5NzIgMTEuNzI5NCAzOS45MzQxIDExLjAxNjRIMzkuOTM3OVoiIGZpbGw9IiMyMzFGMjAiLz48cGF0aCBkPSJNMjIuODI0MiAxNy4yNTI0QzIxLjQ5MjIgMTcuMjUyNCAyMC4yMjc3IDE3Ljg5NDEgMTkuNDM2IDE4Ljk2MzRDMTkuMDc1OCAxOS40NTEyIDE5LjE4MDkgMjAuMTM3OSAxOS42Njg2IDIwLjQ5ODFDMjAuMTU2NCAyMC44NTQ1IDIwLjg0MzEgMjAuNzUzMiAyMS4yMDMzIDIwLjI2NTVDMjEuNTg2IDE5Ljc0MzkgMjIuMTc4OSAxOS40NDc1IDIyLjgyOCAxOS40NDc1QzIzLjkzNDkgMTkuNDQ3NSAyNC44MzkyIDIwLjM1MTggMjQuODM5MiAyMS40NjI0QzI0LjgzOTIgMjIuMTE1MyAyNC41MjAyIDIyLjcyNjkgMjMuOTkxMiAyMy4xMDIxQzIzLjY0MjIgMjMuMzQ5OCAyMy40Njk2IDIzLjc3NzUgMjMuNTQ0NyAyNC4xOTc3QzIzLjYxOTcgMjQuNjE4IDIzLjkzODYgMjQuOTU1NyAyNC4zNTE0IDI1LjA2MDhDMjUuNjA4NCAyNS4zODM0IDI2LjQ4NjQgMjYuNTIwNCAyNi40ODY0IDI3LjgyNjFDMjYuNDg2NCAyOS4zOTgzIDI1LjIwNjkgMzAuNjc0IDIzLjYzODUgMzAuNjc0QzIzLjA2NDQgMzAuNjc0IDIyLjUxMjggMzAuNTA1MiAyMi4wNDM4IDMwLjE5QzIxLjc5OTkgMzAuMDI0OSAyMS41MDcyIDI5Ljk2NDkgMjEuMjE4MyAzMC4wMjQ5QzIwLjkyOTQgMzAuMDgxMiAyMC42ODE3IDMwLjI0NjMgMjAuNTIwNCAzMC40ODY0QzIwLjM1NTMgMzAuNzMwMyAyMC4yOTUzIDMxLjAyMyAyMC4zNTE1IDMxLjMwODJDMjAuNDA3OCAzMS41OTcxIDIwLjU3MjkgMzEuODQ0NyAyMC44MTY4IDMyLjAwOThDMjEuNjUzNiAzMi41NzI2IDIyLjYyOTEgMzIuODY5MSAyMy42Mzg1IDMyLjg2OTFDMjYuNDE4OCAzMi44NjkxIDI4LjY4MTQgMzAuNjA2NSAyOC42ODE0IDI3LjgyNjFDMjguNjgxNCAyNi4xMjY0IDI3LjgyOTcgMjQuNTU0MiAyNi40Mzc2IDIzLjYyMzdDMjYuODI0MSAyMi45NzQ1IDI3LjAzNDIgMjIuMjIwMyAyNy4wMzQyIDIxLjQ2NjJDMjcuMDM0MiAxOS4xNDczIDI1LjE0NjggMTcuMjU2MiAyMi44MzE3IDE3LjI1NjJMMjIuODI0MiAxNy4yNTI0WiIgZmlsbD0iIzIzMUYyMCIvPjwvc3ZnPgo=);
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort .features > *.sea:before {
+				background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDYiIGhlaWdodD0iMzEiIHZpZXdCb3g9IjAgMCA0NiAzMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjIuODQ5OCA3LjQ4NDUyQzIyLjE0MjQgNy40ODQ1MiAyMS41NjY5IDYuOTA5MDYgMjEuNTY2OSA2LjIwMTY0VjEuNTA5OTRDMjEuNTY2OSAwLjgwMjUxNyAyMi4xNDI0IDAuMjI3MDUxIDIyLjg0OTggMC4yMjcwNTFDMjMuNTU3MiAwLjIyNzA1MSAyNC4xMzI3IDAuODAyNTE3IDI0LjEzMjcgMS41MDk5NFY2LjIwMTY0QzI0LjEzMjcgNi45MDkwNiAyMy41NTcyIDcuNDg0NTIgMjIuODQ5OCA3LjQ4NDUyWiIgZmlsbD0iYmxhY2siLz48cGF0aCBkPSJNMTAuMzI4OCAyMC4wMDU3SDUuNjM3MTNDNC45Mjk3MSAyMC4wMDU3IDQuMzU0MjUgMTkuNDMwMiA0LjM1NDI1IDE4LjcyMjhDNC4zNTQyNSAxOC4wMTU0IDQuOTI5NzEgMTcuNDM5OSA1LjYzNzEzIDE3LjQzOTlIMTAuMzI4OEMxMS4wMzYzIDE3LjQzOTkgMTEuNjExNyAxOC4wMTU0IDExLjYxMTcgMTguNzIyOEMxMS42MTE3IDE5LjQzMDIgMTEuMDM2MyAyMC4wMDU3IDEwLjMyODggMjAuMDA1N1oiIGZpbGw9ImJsYWNrIi8+PHBhdGggZD0iTTQwLjA1ODggMjAuMDA1N0gzNS4zNjcxQzM0LjY1OTcgMjAuMDA1NyAzNC4wODQyIDE5LjQzMDIgMzQuMDg0MiAxOC43MjI4QzM0LjA4NDIgMTguMDE1NCAzNC42NTk3IDE3LjQzOTkgMzUuMzY3MSAxNy40Mzk5SDQwLjA1ODhDNDAuNzY2MiAxNy40Mzk5IDQxLjM0MTcgMTguMDE1NCA0MS4zNDE3IDE4LjcyMjhDNDEuMzQxNyAxOS40MzAyIDQwLjc2NjIgMjAuMDA1NyA0MC4wNTg4IDIwLjAwNTdaIiBmaWxsPSJibGFjayIvPjxwYXRoIGQ9Ik0zMS43MDE4IDExLjE0OTlDMzEuMzcxOSAxMS4xNDk5IDMxLjA0NTcgMTEuMDI1MiAzMC43OTY0IDEwLjc3MjNDMzAuMjk0MyAxMC4yNzAyIDMwLjI5NDMgOS40NjAxMiAzMC43OTY0IDguOTU3OTZMMzQuMTEzNiA1LjY0MDc4QzM0LjYxNTggNS4xMzg2MiAzNS40MjU4IDUuMTM4NjIgMzUuOTI4IDUuNjQwNzhDMzYuNDMwMSA2LjE0Mjk0IDM2LjQzMDEgNi45NTI5OSAzNS45MjggNy40NTUxNUwzMi42MTA4IDEwLjc3MjNDMzIuMzYxNSAxMS4wMjE2IDMyLjAzMTcgMTEuMTQ5OSAzMS43MDU0IDExLjE0OTlIMzEuNzAxOFoiIGZpbGw9ImJsYWNrIi8+PHBhdGggZD0iTTEzLjk5NDIgMTEuMTQ5OUMxMy42NjQzIDExLjE0OTkgMTMuMzM4MSAxMS4wMjUyIDEzLjA4ODggMTAuNzcyM0w5Ljc3MTY0IDcuNDU1MTVDOS4yNjk0OCA2Ljk1Mjk5IDkuMjY5NDggNi4xNDI5NCA5Ljc3MTY0IDUuNjQwNzhDMTAuMjczOCA1LjEzODYyIDExLjA4MzggNS4xMzg2MiAxMS41ODYgNS42NDA3OEwxNC45MDMyIDguOTU3OTZDMTUuNDA1MyA5LjQ2MDEyIDE1LjQwNTMgMTAuMjcwMiAxNC45MDMyIDEwLjc3MjNDMTQuNjUzOSAxMS4wMjE2IDE0LjMyNDEgMTEuMTQ5OSAxMy45OTc4IDExLjE0OTlIMTMuOTk0MloiIGZpbGw9ImJsYWNrIi8+PHBhdGggZD0iTTE1LjE4MTggMjIuOTIzM0MxNS41ODE0IDIzLjA0MDYgMTYuMDQ2OSAyMy4wOTkyIDE2LjU3ODMgMjMuMDk5MkMxNi45MjY2IDIzLjA5OTIgMTcuMjUyOCAyMy4wNjI2IDE3LjU1NyAyMy4wMDAzQzE2LjYwNzcgMjEuODMxIDE2LjAzNTkgMjAuMzQyOSAxNi4wMzU5IDE4LjcyMjdDMTYuMDM1OSAxNC45Njk0IDE5LjA4OTEgMTEuOTE2MSAyMi44NDI1IDExLjkxNjFDMjYuNTk1OSAxMS45MTYxIDI5LjY0OTEgMTQuOTY5NCAyOS42NDkxIDE4LjcyMjdDMjkuNjQ5MSAyMC4zNTAyIDI5LjA3MzcgMjEuODQ1NyAyOC4xMTcgMjMuMDE4NkMyOC4yODkzIDIzLjA1NTIgMjguNDY1MiAyMy4wODA5IDI4LjY1MjEgMjMuMDk5MkMyOC42NjMxIDIzLjA5OTIgMjguNjcwNSAyMy4wOTkyIDI4LjY4MTUgMjMuMDk5MkMyOC43MTA4IDIzLjA5OTIgMjguNzQwMSAyMy4xMDY2IDI4Ljc2OTQgMjMuMTA2NkMyOC44Nzk0IDIzLjExMzkgMjguOTkzIDIzLjExNzYgMjkuMTEwMyAyMy4xMTc2QzI5LjY0MTggMjMuMTE3NiAzMC4xMDczIDIzLjA1ODkgMzAuNTA2OCAyMi45NDE2QzMwLjczMDQgMjIuODY0NiAzMS4wMjczIDIyLjc0IDMxLjM4MjkgMjIuNTcxNEMzMS45MTQzIDIxLjM5NDggMzIuMjE0OSAyMC4wOTM2IDMyLjIxNDkgMTguNzE5MUMzMi4yMTQ5IDEzLjU1MDkgMjguMDEwNyA5LjM0NjY4IDIyLjg0MjUgOS4zNDY2OEMxNy42NzQzIDkuMzQ2NjggMTMuNDcwMSAxMy41NTA5IDEzLjQ3MDEgMTguNzE5MUMxMy40NzAxIDIwLjA4MjYgMTMuNzYzMyAyMS4zNzY1IDE0LjI4NzUgMjIuNTQyMUMxNC42NTAzIDIyLjcxMDcgMTQuOTQ3MiAyMi44MzkgMTUuMTc0NSAyMi45MTZMMTUuMTgxOCAyMi45MjMzWiIgZmlsbD0iYmxhY2siLz48cGF0aCBkPSJNNDUuMjIzNCAyNC4yMjgyQzQ1LjA4MDQgMjMuOTMxMyA0NC44NzE1IDIzLjczMzQgNDQuNjAwMyAyMy42MzA4QzQ0LjMyOSAyMy41MjgxIDQ0LjA1MDUgMjMuNTUwMSA0My43NjA5IDIzLjY5NjdMNDMuNjMyNiAyMy43NDA3QzQzLjIwMzggMjMuOTQ5NyA0Mi44NTkyIDI0LjA5NjMgNDIuNTk5IDI0LjE4NDJDNDIuMTk5NCAyNC4zMDE1IDQxLjczNzYgMjQuMzYwMiA0MS4yMjQ1IDI0LjM2MDJDNDAuNzExMyAyNC4zNjAyIDQwLjI0OTUgMjQuMzAxNSAzOS44NDk5IDI0LjE4NDJDMzkuNTkzNCAyNC4wOTYzIDM5LjI0ODggMjMuOTQ5NyAzOC44MTYzIDIzLjc0MDdMMzguNjg4IDIzLjY5NjdDMzguMTQ1NSAyMy4zOTk4IDM3LjY3MjcgMjMuMTk0NiAzNy4yNjk1IDIzLjA3NzNDMzYuNjM5MSAyMi44NzIgMzUuOTM1MyAyMi43NjU3IDM1LjE2MTkgMjIuNzY1N0MzNC4zODg1IDIyLjc2NTcgMzMuNjg0OCAyMi44Njg0IDMzLjA1NDMgMjMuMDc3M0MzMi42ODA0IDIzLjE5NDYgMzIuMjIyMyAyMy40MDM1IDMxLjY3OTggMjMuNjk2N0wzMS41NTE1IDIzLjc0MDdDMzEuMTIyNiAyMy45NDk3IDMwLjc3ODEgMjQuMDk2MyAzMC41MTc5IDI0LjE4NDJDMzAuMTE4MyAyNC4zMDE1IDI5LjY1MjggMjQuMzYwMiAyOS4xMjEzIDI0LjM2MDJDMjkuMDA0IDI0LjM2MDIgMjguODkwNCAyNC4zNTY1IDI4Ljc4MDUgMjQuMzQ5MkMyOC43NTExIDI0LjM0OTIgMjguNzIxOCAyNC4zNDE5IDI4LjY5MjUgMjQuMzQxOUMyOC42ODE1IDI0LjM0MTkgMjguNjc0MiAyNC4zNDE5IDI4LjY2MzIgMjQuMzQxOUMyOC4zMTEzIDI0LjMxMjUgMjcuOTg1MSAyNC4yNDY1IDI3LjY4MDggMjQuMTQwM0MyNy4zOTQ5IDI0LjA4MTYgMjcuMDI4NCAyMy45MzUgMjYuNTg0OSAyMy42OTY3QzI2LjE0MTQgMjMuNDYyMiAyNS43NjAyIDIzLjI4MjYgMjUuNDQ1IDIzLjE2NTNDMjQuOTI4MSAyMi45ODkzIDI0LjM4NTcgMjIuODY4NCAyMy44MTAyIDIyLjgwOTdDMjMuODEwMiAyMi44MDk3IDIzLjYzMDYgMjIuNzgwNCAyMy4zMjI3IDIyLjc2NTdDMjMuMjIzNyAyMi43NTQ3IDIzLjEyMTEgMjIuNzQ3NCAyMy4wMjIxIDIyLjc0MzdDMjIuMzQ0IDIyLjcxNDQgMjEuODk2OSAyMi43ODc3IDIxLjg5NjkgMjIuNzg3N0MyMS4zMjE0IDIyLjg0NjQgMjAuNzc4OSAyMi45NjM3IDIwLjI2MjEgMjMuMTQzM0MxOS45NDY5IDIzLjI2MDYgMTkuNTY1NyAyMy40NDAyIDE5LjEyMjIgMjMuNjc0N0MxOC42Nzg2IDIzLjkxMyAxOC4zMTIxIDI0LjA1OTYgMTguMDI2MiAyNC4xMTgzQzE3LjU5NzMgMjQuMjY0OSAxNy4xMTcyIDI0LjMzODIgMTYuNTg1NyAyNC4zMzgyQzE2LjA1NDIgMjQuMzM4MiAxNS41ODg3IDI0LjI3OTUgMTUuMTg5MiAyNC4xNjIyQzE0LjkzMjYgMjQuMDc0MyAxNC41ODgxIDIzLjkyNzcgMTQuMTU1NSAyMy43MTg3TDE0LjAyNzMgMjMuNjc0N0MxMy40ODExIDIzLjM3NzkgMTMuMDIyOSAyMy4xNzI2IDEyLjY1MjcgMjMuMDU1M0MxMi4wMjIzIDIyLjg1IDExLjMxODUgMjIuNzQzNyAxMC41NDUxIDIyLjc0MzdDOS43NzE3NCAyMi43NDM3IDkuMDY3OTggMjIuODQ2NCA4LjQzNzU0IDIzLjA1NTNDOC4wMzQzNCAyMy4xNzI2IDcuNTYxNTEgMjMuMzgxNSA3LjAxOTAzIDIzLjY3NDdMNi44OTA3NCAyMy43MTg3QzYuNDYxODkgMjMuOTI3NyA2LjExNzM0IDI0LjA3NDMgNS44NTcxIDI0LjE2MjJDNS40NTM5MSAyNC4yNzk1IDQuOTk1NzQgMjQuMzM4MiA0LjQ4MjU4IDI0LjMzODJDMy45Njk0MyAyNC4zMzgyIDMuNTA3NTkgMjQuMjc5NSAzLjEwODA2IDI0LjE2MjJDMi44NTE0OCAyNC4wNzQzIDIuNTA2OTQgMjMuOTI3NyAyLjA3NDQyIDIzLjcxODdMMS45NDYxMyAyMy42NzQ3QzEuNjYwMjMgMjMuNTI4MSAxLjM4MTY2IDIzLjUwNjEgMS4xMDY3NiAyMy42MDg4QzAuODM1NTE3IDIzLjcxMTQgMC42MjY1OSAyMy45MTMgMC40ODM2MzkgMjQuMjA2MkMwLjM0MDY4OSAyNC41MDMxIDAuMzE4Njk3IDI0Ljc5NjQgMC40MTc2NjIgMjUuMDkzM0MwLjUxNjYyOCAyNS4zOTAyIDAuNjk2MjMyIDI1LjYxMDEgMC45NTY0NzUgMjUuNzU2N0MxLjUwMjYyIDI2LjA1MzYgMS45NzU0NSAyNi4yNTg4IDIuMzc0OTggMjYuMzc2MUMzLjAwNTQzIDI2LjU4MTQgMy43MDkxOCAyNi42ODc3IDQuNDgyNTggMjYuNjg3N0M1LjI1NTk4IDI2LjY4NzcgNS45NTk3MyAyNi41ODUxIDYuNTkwMTggMjYuMzc2MUM2Ljk4OTcxIDI2LjI1ODggNy40NjYyMSAyNi4wNDk5IDguMDA4NjkgMjUuNzU2N0w4LjEzNjk3IDI1LjcxMjdDOC41NjU4MyAyNS41MDc0IDguOTEwMzcgMjUuMzU3MiA5LjE3MDYxIDI1LjI2OTJDOS41NzAxNCAyNS4xNTE5IDEwLjAzMiAyNS4wOTMzIDEwLjU0NTEgMjUuMDkzM0MxMS4wNTgzIDI1LjA5MzMgMTEuNTIwMSAyNS4xNTE5IDExLjkxOTcgMjUuMjY5MkMxMi4xNzYyIDI1LjM1NzIgMTIuNTIwOCAyNS41MDc0IDEyLjk1MzMgMjUuNzEyN0wxMy4wODE2IDI1Ljc1NjdDMTMuNjI3NyAyNi4wNTM2IDE0LjA4NTkgMjYuMjU4OCAxNC40NTYxIDI2LjM3NjFDMTUuMDg2NiAyNi41ODE0IDE1Ljc5MDMgMjYuNjg3NyAxNi41NjM3IDI2LjY4NzdDMTYuNjQwNyAyNi42ODc3IDE2LjcxNCAyNi42ODA0IDE2Ljc4NzMgMjYuNjgwNEMxNi44NjA2IDI2LjY5ODcgMTYuOTM3NiAyNi43MDk3IDE3LjAxNDYgMjYuNzA5N0MxNy44MTczIDI2LjcwOTcgMTguNTM1NyAyNi42MDcxIDE5LjE2NjEgMjYuMzk4MUMxOS41NCAyNi4yODA4IDE5Ljk5ODIgMjYuMDcxOSAyMC41NDA3IDI1Ljc3ODdMMjAuNjY4OSAyNS43MzQ3QzIxLjA5NzggMjUuNTI5NCAyMS40NDIzIDI1LjM3OTIgMjEuNzAyNiAyNS4yOTEyQzIyLjEwNTggMjUuMTczOSAyMi41NjQgMjUuMTE1MiAyMy4wNzcxIDI1LjExNTJDMjMuMDkxOCAyNS4xMTUyIDIzLjEwNjQgMjUuMTE1MiAyMy4xMTc0IDI1LjExNTJDMjMuNDM2MyAyNS4xNDA5IDIzLjczMzIgMjUuMTkyMiAyNC4wMDA4IDI1LjI2OTJDMjQuMjU3NCAyNS4zNTcyIDI0LjYwMTkgMjUuNTA3NCAyNS4wMzQ0IDI1LjcxMjdMMjUuMTYyNyAyNS43NTY3QzI1LjcwODkgMjYuMDUzNiAyNi4xNjcgMjYuMjU4OCAyNi41MzcyIDI2LjM3NjFDMjcuMTE2NCAyNi41NjY3IDI3Ljc3MjUgMjYuNjY1NyAyOC41MDE5IDI2LjY4MDRDMjguNzEwOCAyNi42OTg3IDI4LjkyMzQgMjYuNzA2IDI5LjEzOTcgMjYuNzA2QzI5LjkxMzEgMjYuNzA2IDMwLjYxNjggMjYuNjAzNCAzMS4yNDczIDI2LjM5NDVDMzEuNjIxMSAyNi4yNzcyIDMyLjA3OTMgMjYuMDY4MiAzMi42MjE4IDI1Ljc3NUwzMi43NTAxIDI1LjczMUMzMy4xNzg5IDI1LjUyNTggMzMuNTIzNSAyNS4zNzU1IDMzLjc4MzcgMjUuMjg3NUMzNC4xODY5IDI1LjE3MDIgMzQuNjQ1MSAyNS4xMTE2IDM1LjE1ODIgMjUuMTExNkMzNS42NzE0IDI1LjExMTYgMzYuMTMzMiAyNS4xNzAyIDM2LjUzMjggMjUuMjg3NUMzNi43ODkzIDI1LjM3NTUgMzcuMTMzOSAyNS41MjU4IDM3LjU2NjQgMjUuNzMxTDM3LjY5NDcgMjUuNzc1QzM4LjI0MDggMjYuMDcxOSAzOC43MTM3IDI2LjI3NzIgMzkuMTEzMiAyNi4zOTQ1QzM5Ljc0MzYgMjYuNTk5NyA0MC40NDc0IDI2LjcwNiA0MS4yMjA4IDI2LjcwNkM0MS45OTQyIDI2LjcwNiA0Mi42OTc5IDI2LjYwMzQgNDMuMzI4NCAyNi4zOTQ1QzQzLjczMTYgMjYuMjc3MiA0NC4yMDQ0IDI2LjA2ODIgNDQuNzQ2OSAyNS43NzVDNDUuMDAzNSAyNS42Mjg0IDQ1LjE4MzEgMjUuNDA0OCA0NS4yODU3IDI1LjExMTZDNDUuMzg0NyAyNC44MTQ3IDQ1LjM2NjMgMjQuNTIxNSA0NS4yMTk3IDI0LjIyNDZMNDUuMjIzNCAyNC4yMjgyWiIgZmlsbD0iYmxhY2siLz48cGF0aCBkPSJNNDUuMjIzNCAyOC4xNjA4QzQ1LjA4MDQgMjcuODYzOSA0NC44NzE1IDI3LjY2NiA0NC42MDAzIDI3LjU2MzRDNDQuMzI5IDI3LjQ2MDggNDQuMDUwNSAyNy40ODI3IDQzLjc2MDkgMjcuNjI5NEw0My42MzI2IDI3LjY3MzNDNDMuMjAzOCAyNy44ODIzIDQyLjg1OTIgMjguMDI4OSA0Mi41OTkgMjguMTE2OUM0Mi4xOTk0IDI4LjIzNDEgNDEuNzM3NiAyOC4yOTI4IDQxLjIyNDUgMjguMjkyOEM0MC43MTEzIDI4LjI5MjggNDAuMjQ5NSAyOC4yMzQxIDM5Ljg0OTkgMjguMTE2OUMzOS41OTM0IDI4LjAyODkgMzkuMjQ4OCAyNy44ODIzIDM4LjgxNjMgMjcuNjczM0wzOC42ODggMjcuNjI5NEMzOC4xNDU1IDI3LjMzMjUgMzcuNjcyNyAyNy4xMjcyIDM3LjI2OTUgMjcuMDA5OUMzNi42MzkxIDI2LjgwNDYgMzUuOTM1MyAyNi42OTgzIDM1LjE2MTkgMjYuNjk4M0MzNC4zODg1IDI2LjY5ODMgMzMuNjg0OCAyNi44MDEgMzMuMDU0MyAyNy4wMDk5QzMyLjY4MDQgMjcuMTI3MiAzMi4yMjIzIDI3LjMzNjEgMzEuNjc5OCAyNy42Mjk0TDMxLjU1MTUgMjcuNjczM0MzMS4xMjI2IDI3Ljg4MjMgMzAuNzc4MSAyOC4wMjg5IDMwLjUxNzkgMjguMTE2OUMzMC4xMTgzIDI4LjIzNDEgMjkuNjUyOCAyOC4yOTI4IDI5LjEyMTMgMjguMjkyOEMyOS4wMDQgMjguMjkyOCAyOC44OTA0IDI4LjI4OTEgMjguNzgwNSAyOC4yODE4QzI4Ljc1MTEgMjguMjgxOCAyOC43MjE4IDI4LjI3NDUgMjguNjkyNSAyOC4yNzQ1QzI4LjY4MTUgMjguMjc0NSAyOC42NzQyIDI4LjI3NDUgMjguNjYzMiAyOC4yNzQ1QzI4LjMxMTMgMjguMjQ1MSAyNy45ODUxIDI4LjE3OTIgMjcuNjgwOCAyOC4wNzI5QzI3LjM5NDkgMjguMDE0MiAyNy4wMjg0IDI3Ljg2NzYgMjYuNTg0OSAyNy42Mjk0QzI2LjE0MTQgMjcuMzk0OCAyNS43NjAyIDI3LjIxNTIgMjUuNDQ1IDI3LjA5NzlDMjQuOTI4MSAyNi45MjE5IDI0LjM4NTcgMjYuODAxIDIzLjgxMDIgMjYuNzQyM0MyMy44MTAyIDI2Ljc0MjMgMjMuNjMwNiAyNi43MTMgMjMuMzIyNyAyNi42OTgzQzIzLjIyMzcgMjYuNjg3NCAyMy4xMjExIDI2LjY4IDIzLjAyMjEgMjYuNjc2NEMyMi4zNDQgMjYuNjQ3IDIxLjg5NjkgMjYuNzIwMyAyMS44OTY5IDI2LjcyMDNDMjEuMzIxNCAyNi43NzkgMjAuNzc4OSAyNi44OTYzIDIwLjI2MjEgMjcuMDc1OUMxOS45NDY5IDI3LjE5MzIgMTkuNTY1NyAyNy4zNzI4IDE5LjEyMjIgMjcuNjA3NEMxOC42Nzg2IDI3Ljg0NTYgMTguMzEyMSAyNy45OTIyIDE4LjAyNjIgMjguMDUwOUMxNy41OTczIDI4LjE5NzUgMTcuMTE3MiAyOC4yNzA4IDE2LjU4NTcgMjguMjcwOEMxNi4wNTQyIDI4LjI3MDggMTUuNTg4NyAyOC4yMTIyIDE1LjE4OTIgMjguMDk0OUMxNC45MzI2IDI4LjAwNjkgMTQuNTg4MSAyNy44NjAzIDE0LjE1NTUgMjcuNjUxM0wxNC4wMjczIDI3LjYwNzRDMTMuNDgxMSAyNy4zMTA1IDEzLjAyMjkgMjcuMTA1MiAxMi42NTI3IDI2Ljk4NzlDMTIuMDIyMyAyNi43ODI3IDExLjMxODUgMjYuNjc2NCAxMC41NDUxIDI2LjY3NjRDOS43NzE3NCAyNi42NzY0IDkuMDY3OTggMjYuNzc5IDguNDM3NTQgMjYuOTg3OUM4LjAzNDM0IDI3LjEwNTIgNy41NjE1MSAyNy4zMTQxIDcuMDE5MDMgMjcuNjA3NEw2Ljg5MDc0IDI3LjY1MTNDNi40NjE4OSAyNy44NjAzIDYuMTE3MzQgMjguMDA2OSA1Ljg1NzEgMjguMDk0OUM1LjQ1MzkxIDI4LjIxMjIgNC45OTU3NCAyOC4yNzA4IDQuNDgyNTggMjguMjcwOEMzLjk2OTQzIDI4LjI3MDggMy41MDc1OSAyOC4yMTIyIDMuMTA4MDYgMjguMDk0OUMyLjg1MTQ4IDI4LjAwNjkgMi41MDY5NCAyNy44NjAzIDIuMDc0NDIgMjcuNjUxM0wxLjk0NjEzIDI3LjYwNzRDMS42NjAyMyAyNy40NjA3IDEuMzgxNjYgMjcuNDM4OCAxLjEwNjc2IDI3LjU0MTRDMC44MzU1MTcgMjcuNjQ0IDAuNjI2NTkgMjcuODQ1NiAwLjQ4MzYzOSAyOC4xMzg4QzAuMzQwNjg5IDI4LjQzNTcgMC4zMTg2OTcgMjguNzI5IDAuNDE3NjYyIDI5LjAyNTlDMC41MTY2MjggMjkuMzIyOCAwLjY5NjIzMiAyOS41NDI3IDAuOTU2NDc1IDI5LjY4OTNDMS41MDI2MiAyOS45ODYyIDEuOTc1NDUgMzAuMTkxNSAyLjM3NDk4IDMwLjMwODhDMy4wMDU0MyAzMC41MTQgMy43MDkxOCAzMC42MjAzIDQuNDgyNTggMzAuNjIwM0M1LjI1NTk4IDMwLjYyMDMgNS45NTk3MyAzMC41MTc3IDYuNTkwMTggMzAuMzA4OEM2Ljk4OTcxIDMwLjE5MTUgNy40NjYyMSAyOS45ODI1IDguMDA4NjkgMjkuNjg5M0w4LjEzNjk3IDI5LjY0NTNDOC41NjU4MyAyOS40NDAxIDguOTEwMzcgMjkuMjg5OCA5LjE3MDYxIDI5LjIwMThDOS41NzAxNCAyOS4wODQ1IDEwLjAzMiAyOS4wMjU5IDEwLjU0NTEgMjkuMDI1OUMxMS4wNTgzIDI5LjAyNTkgMTEuNTIwMSAyOS4wODQ1IDExLjkxOTcgMjkuMjAxOEMxMi4xNzYyIDI5LjI4OTggMTIuNTIwOCAyOS40NDAxIDEyLjk1MzMgMjkuNjQ1M0wxMy4wODE2IDI5LjY4OTNDMTMuNjI3NyAyOS45ODYyIDE0LjA4NTkgMzAuMTkxNSAxNC40NTYxIDMwLjMwODhDMTUuMDg2NiAzMC41MTQgMTUuNzkwMyAzMC42MjAzIDE2LjU2MzcgMzAuNjIwM0MxNi42NDA3IDMwLjYyMDMgMTYuNzE0IDMwLjYxMyAxNi43ODczIDMwLjYxM0MxNi44NjA2IDMwLjYzMTMgMTYuOTM3NiAzMC42NDIzIDE3LjAxNDYgMzAuNjQyM0MxNy44MTczIDMwLjY0MjMgMTguNTM1NyAzMC41Mzk3IDE5LjE2NjEgMzAuMzMwN0MxOS41NCAzMC4yMTM1IDE5Ljk5ODIgMzAuMDA0NSAyMC41NDA3IDI5LjcxMTNMMjAuNjY4OSAyOS42NjczQzIxLjA5NzggMjkuNDYyMSAyMS40NDIzIDI5LjMxMTggMjEuNzAyNiAyOS4yMjM4QzIyLjEwNTggMjkuMTA2NSAyMi41NjQgMjkuMDQ3OSAyMy4wNzcxIDI5LjA0NzlDMjMuMDkxOCAyOS4wNDc5IDIzLjEwNjQgMjkuMDQ3OSAyMy4xMTc0IDI5LjA0NzlDMjMuNDM2MyAyOS4wNzM1IDIzLjczMzIgMjkuMTI0OCAyNC4wMDA4IDI5LjIwMThDMjQuMjU3NCAyOS4yODk4IDI0LjYwMTkgMjkuNDQwMSAyNS4wMzQ0IDI5LjY0NTNMMjUuMTYyNyAyOS42ODkzQzI1LjcwODkgMjkuOTg2MiAyNi4xNjcgMzAuMTkxNSAyNi41MzcyIDMwLjMwODhDMjcuMTE2NCAzMC40OTk0IDI3Ljc3MjUgMzAuNTk4MyAyOC41MDE5IDMwLjYxM0MyOC43MTA4IDMwLjYzMTMgMjguOTIzNCAzMC42Mzg2IDI5LjEzOTcgMzAuNjM4NkMyOS45MTMxIDMwLjYzODYgMzAuNjE2OCAzMC41MzYgMzEuMjQ3MyAzMC4zMjcxQzMxLjYyMTEgMzAuMjA5OCAzMi4wNzkzIDMwLjAwMDkgMzIuNjIxOCAyOS43MDc2TDMyLjc1MDEgMjkuNjYzNkMzMy4xNzg5IDI5LjQ1ODQgMzMuNTIzNSAyOS4zMDgxIDMzLjc4MzcgMjkuMjIwMUMzNC4xODY5IDI5LjEwMjggMzQuNjQ1MSAyOS4wNDQyIDM1LjE1ODIgMjkuMDQ0MkMzNS42NzE0IDI5LjA0NDIgMzYuMTMzMiAyOS4xMDI4IDM2LjUzMjggMjkuMjIwMUMzNi43ODkzIDI5LjMwODEgMzcuMTMzOSAyOS40NTg0IDM3LjU2NjQgMjkuNjYzNkwzNy42OTQ3IDI5LjcwNzZDMzguMjQwOCAzMC4wMDQ1IDM4LjcxMzcgMzAuMjA5OCAzOS4xMTMyIDMwLjMyNzFDMzkuNzQzNiAzMC41MzIzIDQwLjQ0NzQgMzAuNjM4NiA0MS4yMjA4IDMwLjYzODZDNDEuOTk0MiAzMC42Mzg2IDQyLjY5NzkgMzAuNTM2IDQzLjMyODQgMzAuMzI3MUM0My43MzE2IDMwLjIwOTggNDQuMjA0NCAzMC4wMDA5IDQ0Ljc0NjkgMjkuNzA3NkM0NS4wMDM1IDI5LjU2MSA0NS4xODMxIDI5LjMzNzQgNDUuMjg1NyAyOS4wNDQyQzQ1LjM4NDcgMjguNzQ3MyA0NS4zNjYzIDI4LjQ1NDEgNDUuMjE5NyAyOC4xNTcyTDQ1LjIyMzQgMjguMTYwOFoiIGZpbGw9ImJsYWNrIi8+PC9zdmc+Cg==);
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort .features > * .label {
+				line-height: 1.1;
+			}
+			#site-wrap section.cities-and-resorts .resorts > .resort .actions .buttonlike:nth-child(n + 2) {
+				margin-left: 1em;
+			}
+			#site-wrap section.what2do > .contenu .double-cols {
+				column-count: 2;
+				column-gap: 3em;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section.what2do > .contenu .double-cols {
+					column-count: auto;
+				}
+			}
+			#site-wrap section.what2do > .contenu ul {
+				list-style: disc;
+				font-size: 1.2em;
+			}
+			#site-wrap section.what2do > .contenu ul li {
+				font-weight: normal;
+				margin: 0;
+				padding: 0.5em 0;
+				line-height: 1.2;
+			}
+			#site-wrap section.just-pics > .contenu .pics {
+				display: flex;
+				width: 100%;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section.just-pics > .contenu .pics {
+					flex-wrap: wrap;
+				}
+			}
+			#site-wrap section.just-pics > .contenu .pics .pic {
+				flex: 1 1 40%;
+				position: relative;
+				margin: 1em;
+				border-radius: 1em;
+				background: center no-repeat;
+				background-size: cover;
+			}
+			#site-wrap section.just-pics > .contenu .pics .pic:before {
+				content: "";
+				display: block;
+				padding-top: 56.25%;
+			}
+			#site-wrap section.just-pics > .contenu .pics .pic > * {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section.just-pics > .contenu .pics .pic {
+					flex: 1 1 90%;
+				}
+			}
+			#site-wrap section.important > .contenu .double-cols {
+				column-count: 2;
+				column-gap: 3em;
+			}
+			@media screen and (max-width: 768px) {
+				#site-wrap section.important > .contenu .double-cols {
+					column-count: auto;
+				}
+			}
+			#site-wrap section.important > .contenu ul {
+				list-style: disc;
+				font-size: 1.2em;
+			}
+			#site-wrap section.important > .contenu ul li {
+				margin: 0;
+				padding: 0.5em 0;
+				line-height: 1.2;
+			}
+			#site-wrap section.important > .contenu ul li a {
+				font-family: inherit;
+				line-height: inherit;
+				font-size: inherit;
+				text-decoration: underline;
+			}
+			[data-module="destinationDetail"] h1 {
+				display: none;
+			}
+
+			.poi .contenu {
+				display: grid !important;
+				grid-template-columns: 1fr 1fr;
+				column-gap: 40px;
+			}
+
+			.poi .column {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				height: 100%;
+			}
+
+			.column h2 {
+				text-align: left !important;
+			}
+
+			.poi .images {
+				display: flex !important;
+				flex-direction: row !important;
+				justify-content: center;
+				max-width: 100%;
+				flex-wrap: wrap;
+				row-gap: 40px;
+			}
+
+			.images img {
+				width: calc(100% / 3 - 30px) !important;
+			}
+
+			.double-cols img {
+				width: 100%;
+				object-fit: cover;
+			}
+
+			.poi .desktop {
+				display: initial;
+			}
+			@media screen and (max-width: 768px) {
+				.poi .desktop {
+					display: none !important;
+				}
+			}
+
+			.poi .mobile {
+				display: none !important;
+			}
+			@media screen and (max-width: 768px) {
+				.poi .mobile {
+					display: initial;
+				}
+			}
+			.banner {
+				margin: 0 0 55px 0;
+			}
+
+			.banner__image {
+				max-width: 1024px;
+				max-width: 100%;
+			}
+			.swiper-wrapper {
+				height: 90% !important;
+			}
+			.swiper-slide {
+				display: flex;
+			}
+			.swiper-slide img {
+				border-radius: 20px;
+			}
+			.swiper-pagination-bullet {
+				background: #d9d9d9 !important;
+				width: 12px !important;
+				height: 12px !important;
+			}
+			.swiper-pagination-bullet-active {
+				background: #888888 !important;
+			}
+			@media screen and (max-width: 768px) {
+				.swiper-pagination {
+					bottom: 0 !important;
+				}
+				.swiper-pagination-bullet {
+					width: 6px !important;
+					height: 6px !important;
+				}
+			}
+		</style>
+		<div id="site-wrap">
+			<section class="intro">
+				<div class="contenu">&nbsp;</div>
+			</section>
+			<section class="five-reasons">
+				<div class="contenu">
+					<h2>Пять причин отправиться в Египет</h2>
+					<div class="reasons">
+						<div class="reason">
+							<div class="icon" style="background-image: url(//cdn.sunmar.ru/content/cms/russia/egypt-main/plane.png)"> </div>
+							<p>Комфортный перелет</p>
+						</div>
+						<div class="reason">
+							<div class="icon" style="background-image: url('//cdn.sunmar.ru/content/cms/russia/egypt-main/hotel.png')"> </div>
+							<p>Широкий выбор отелей</p>
+						</div>
+						<div class="reason">
+							<div class="icon" style="background-image: url('//cdn.sunmar.ru/content/cms/russia/egypt-main/pyramids.png')"> </div>
+							<p>Тайны пирамид</p>
+						</div>
+						<div class="reason">
+							<div class="icon" style="background-image: url('//cdn.sunmar.ru/content/cms/russia/egypt-main/waves.png')"> </div>
+							<p>Самое чистое море</p>
+						</div>
+						<div class="reason">
+							<div class="icon" style="background-image: url('//cdn.sunmar.ru/content/cms/russia/egypt-main/mask.png')"> </div>
+							<p>Яркий подводный мир</p>
+						</div>
+					</div>
+					<div class="actions">
+						<a
+							href="https://www.sunmar.ru/packagetours/moskva-to-egipet-tours/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2209.09.2022%22%2c%22Dr%22%3a%223%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22z3wAKl7LShHfXLILOghccZtJJYgRo5xru%2fyGgjy1ey%2f4Z8NDlDStizL86C%2bwHp%2feFxsQMX2CzSBdkoQ19mMc1HUCLczn1dc%2bKmKreYvOYZ7JGqPuALqtLKZcJHqVUgh%2fOIkjW6Emm24%2bIp0%2fRkpLlw%3d%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3afalse%2c%22Rglr%22%3atrue%2c%22Srt%22%3a1%7d&amp;f={%22Rh%22:false,%22Ao%22:[%22available%22]}&amp;page=1"
+							class="buttonlike red metric-btn"
+							target="_blank"
+							rel="noopener"
+							>Забронировать тур</a
+						>
+					</div>
+				</div>
+			</section>
+			<section class="business-class">
+				<div class="contenu"> </div>
+			</section>
+			<section class="poi">
+				<div class="contenu desktop">
+					<div class="column">
+						<h2>Интересное в Египте</h2>
+						<p>
+							Египет – земля мистики и древней истории, колыбель цивилизации фараонов, оставившей потомкам множество загадок. Историческое прошлое привлекает не только археологов со всего мира, но и огромное количество путешественников. Современный Египет, столицей которого является многомиллионный Каир (самый большой город Африканского континента), удивляет пирамидами Хеопса, Хефрена и Микерина, Большим Сфинксом на плато Гиза,
+							величественными храмами Луксора и Карнака, Долиной Царей в Фивах, архитектурными изысками Александрии эллинского периода. Для детального знакомства со многими из них едут на экскурсию по Нилу — реке, которая стала источником жизни в египетской пустыне.
+						</p>
+					</div>
+					<div class="column">
+						<h2>Чем заняться в Египте?</h2>
+						<ul>
+							<li>Отдохнуть на превосходных пляжах;</li>
+							<li>Изучить богатый подводный мир Красного моря;</li>
+							<li>Прикоснуться к загадкам истории Древнего мира;</li>
+							<li>Покататься на верблюде;</li>
+							<li>Отправиться в круиз по Нилу.</li>
+						</ul>
+					</div>
+				</div>
+				<div class="desktop contenu images">
+					<img src="//cdn.sunmar.ru/content/cms/russia/egypt-main/photo.png" alt="" />
+					<img src="//cdn.sunmar.ru/content/cms/russia/egypt-main/photo2.png" alt="" />
+					<img src="//cdn.sunmar.ru/content/cms/russia/egypt-main/photo3.png" alt="" />
+				</div>
+				<div class="contenu mobile">
+					<div class="column">
+						<h2>Интересное в Египте</h2>
+						<p>
+							Египет – земля мистики и древней истории, колыбель цивилизации фараонов, оставившей потомкам множество загадок. Историческое прошлое привлекает не только археологов со всего мира, но и огромное количество путешественников. Современный Египет, столицей которого является многомиллионный Каир (самый большой город Африканского континента), удивляет пирамидами Хеопса, Хефрена и Микерина, Большим Сфинксом на плато Гиза,
+							величественными храмами Луксора и Карнака, Долиной Царей в Фивах, архитектурными изысками Александрии эллинского периода. Для детального знакомства со многими из них едут на экскурсию по Нилу — реке, которая стала источником жизни в египетской пустыне.
+						</p>
+					</div>
+					<img src="//cdn.sunmar.ru/content/cms/russia/egypt-main/photo.png" alt="" />
+					<div class="column">
+						<h2>Чем заняться в Египте?</h2>
+						<ul>
+							<li>Отдохнуть на превосходных пляжах;</li>
+							<li>Изучить богатый подводный мир Красного моря;</li>
+							<li>Прикоснуться к загадкам истории Древнего мира;</li>
+							<li>Покататься на верблюде;</li>
+							<li>Отправиться в круиз по Нилу.</li>
+						</ul>
+					</div>
+					<img src="//cdn.sunmar.ru/content/cms/russia/egypt-main/photo2.png" alt="" />
+					<img src="//cdn.sunmar.ru/content/cms/russia/egypt-main/photo3.png" alt="" />
+				</div>
+			</section>
+			<section class="what2do">
+				<div class="contenu">
+					<h2>Туристам на заметку</h2>
+					<ul class="double-cols">
+						<li>С&nbsp;17.06.2022 при въезде в&nbsp;Египет не&nbsp;требуется предъявлять результаты ПЦР-тестов, тестов на&nbsp;антиген, сертификаты о&nbsp;вакцинации. Советуем вам уточнять актуальные правила въезда за&nbsp;несколько дней до&nbsp;вылета.</li>
+						<li>Виза в&nbsp;Египет оформляется и&nbsp;приобретается по&nbsp;прилете, прямо в&nbsp;аэропорту. Она стоит 25&nbsp;USD. При этом для туристов, прибывающих в&nbsp;аэропорт Шарм-эль-Шейх, виза не&nbsp;требуется, достаточно просто поставить штамп в&nbsp;паспорт. Подробную информацию вы&nbsp;найдете на&nbsp;этой странице.</li>
+						<li>Местная валюта&nbsp;&mdash; египетский фунт, разменной монетой является пиастр. Банки и&nbsp;обменные пункты здесь повсюду: в&nbsp;отелях, на&nbsp;улицах курортных городков. Рекомендуем вам наличные средства ввозить в&nbsp;иностранной валюте.</li>
+						<li>Употребление спиртных напитков не&nbsp;запрещено, но&nbsp;находиться в&nbsp;нетрезвом виде в&nbsp;общественных местах не&nbsp;рекомендуем.</li>
+						<li>На&nbsp;территорию Египта запрещено ввозить и&nbsp;использовать беспилотное оборудование: дроны, коптеры, авиамодели.</li>
+						<li>В&nbsp;Египет разрешен ввоз электронных сигарет;</li>
+						<li>Из&nbsp;Египта запрещено вывозить национальную египетскую валюту, предметы старины, кораллы и&nbsp;другие природные предметы;</li>
+						<li>Не&nbsp;рекомендуем вам фотографировать военные объекты, собирать &laquo;на&nbsp;память&raquo; осколки исторических памятников, взбираться на&nbsp;пирамиды, купаться и&nbsp;загорать &laquo;топлес&raquo;, срезать и&nbsp;повреждать кораллы, купаться в&nbsp;Ниле, ходить босиком или лежать на&nbsp;земле без подстилки на&nbsp;его берегах.</li>
+						<li>Внимательно подходите к&nbsp;выбору наряда, когда вы&nbsp;находитесь вне отеля. Не&nbsp;рекомендуем вам носить декольте, короткие юбки и&nbsp;вызывающие наряды.</li>
+					</ul>
+				</div>
+				<div class="contenu">
+					<div class="actions">
+						<a
+							href="https://www.sunmar.ru/packagetours/moskva-to-egipet-tours/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2209.09.2022%22%2c%22Dr%22%3a%223%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22z3wAKl7LShHfXLILOghccZtJJYgRo5xru%2fyGgjy1ey%2f4Z8NDlDStizL86C%2bwHp%2feFxsQMX2CzSBdkoQ19mMc1HUCLczn1dc%2bKmKreYvOYZ7JGqPuALqtLKZcJHqVUgh%2fOIkjW6Emm24%2bIp0%2fRkpLlw%3d%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3afalse%2c%22Rglr%22%3atrue%2c%22Srt%22%3a1%7d&amp;f={%22Rh%22:false,%22Ao%22:[%22available%22]}&amp;page=1"
+							class="buttonlike red metric-btn"
+							target="_blank"
+							rel="noopener"
+							>Забронировать тур</a
+						>
+					</div>
+				</div>
+			</section>
+			<section class="just-pics"></section>
+			<section class="important">
+				<div class="contenu">
+					<h2>Курорты Египта</h2>
+					<div class="double-cols">
+						<div class="column">
+							<ul>
+								<li>Песчаные пляжи Хургады с&nbsp;длинными отмелями у&nbsp;берега прекрасно подойдут для отдыха семей с&nbsp;детьми, даже самыми маленькими.</li>
+								<li>Шарм-эль-Шейх понравится дайверам любого уровня подготовки, а&nbsp;также любителям изучать красочный подводный мир с&nbsp;маской.</li>
+								<li>В&nbsp;Табе нет развлекательных центров и&nbsp;шумных дискотек. Отдых здесь понравится туристам, которые ищут уединение и&nbsp;покой.</li>
+								<li>Марса-Алам порадует высококлассным сервисом и&nbsp;хорошими возможностями для дайвинга.</li>
+								<li>Дахаб&nbsp;&mdash; это идеальное место для дайверов. В&nbsp;основном туристы приезжают сюда, чтобы погрузиться с&nbsp;аквалангом и&nbsp;понаблюдать за&nbsp;невероятным подводным миром Красного моря.</li>
+								<li>Нувейба&nbsp;&mdash; это достаточно тихий курорт. Он&nbsp;придется по&nbsp;душе семейным парам с&nbsp;детьми.</li>
+							</ul>
+						</div>
+						<div class="column" style="display: flex">
+							<div class="swiper">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_4.jpg" alt="" /></div>
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_5.jpg" alt="" /></div>
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_6.jpg" alt="" /></div>
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_7.jpg" alt="" /></div>
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_8.jpg" alt="" /></div>
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_9.jpg" alt="" /></div>
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_10.jpg" alt="" /></div>
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_11.jpg" alt="" /></div>
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_12.jpg" alt="" /></div>
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_13.jpg" alt="" /></div>
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_14.jpg" alt="" /></div>
+									<div class="swiper-slide"><img src="//cdn.sunmar.ru/content/img/egypt/egypt_15.jpg" alt="" /></div>
+								</div>
+								<div class="swiper-pagination"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+			<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+			<script type="text/javascript">
+				const swiper = new Swiper(".swiper", {
+					loop: true,
+					autoplay: true,
+					grabCursor: true,
+					spaceBetween: 10,
+					slidesPerView: 1,
+					speed: 1000,
+					pagination: {
+						el: ".swiper-pagination",
+						clickable: true,
+					},
+				});
+			</script>
+
+			<!--  -->
+
+			<section class="best-hotels">
+				<div class="contenu">
+					<h2>Лучшие отели Египта</h2>
+				</div>
+			</section>
+			<style type="text/css">
+				.reset {
+					position: static;
+					left: auto;
+					top: auto;
+					right: auto;
+					bottom: auto;
+					width: auto;
+					height: auto;
+					margin: 0;
+					padding: 0;
+					-webkit-transform: none;
+					-moz-transform: none;
+					-ms-transform: none;
+					-o-transform: none;
+					transform: none;
+					background: none;
+				}
+				.bbox,
+				.bbox * {
+					box-sizing: border-box;
+				}
+				.interactive {
+					-webkit-user-select: none;
+					-moz-user-select: none;
+					-ms-user-select: none;
+					user-select: none;
+				}
+				.interactive:active {
+					-webkit-transform: translateY(2px);
+					-moz-transform: translateY(2px);
+					-ms-transform: translateY(2px);
+					-o-transform: translateY(2px);
+					transform: translateY(2px);
+				}
+				.abs100x100 {
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+				}
+				.centering {
+					display: table !important;
+					width: 100%;
+					height: 100%;
+				}
+				.centering > *:first-child {
+					width: 100%;
+					height: 100%;
+					display: table-cell;
+					text-align: center;
+					vertical-align: middle;
+				}
+				.centering > *:first-child > *:first-child {
+					display: inline-block;
+				}
+				@media screen and (max-width: 768px) {
+					.hidden-on-mobile {
+						display: none !important;
+					}
+				}
+				@media screen and (min-width: 769px) {
+					.hidden-on-desktop {
+						display: none !important;
+					}
+				}
+				.rur:not(:empty):after {
+					content: " \20BD ";
+				}
+				.rur.per-person:not(:empty):after {
+					content: " \20BD / чел.";
+				}
+				.flex-center {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				#hotels-set {
+					opacity: 0;
+					transform: translateY(10vh);
+					-webkit-transition: opacity 0.5s, transform 0.5s;
+					-moz-transition: opacity 0.5s, transform 0.5s;
+					-ms-transition: opacity 0.5s, transform 0.5s;
+					-o-transition: opacity 0.5s, transform 0.5s;
+					transition: opacity 0.5s, transform 0.5s;
+					overflow: hidden;
+				}
+				#hotels-set,
+				#hotels-set * {
+					box-sizing: border-box;
+				}
+				#hotels-set .buttonlike {
+					-webkit-user-select: none;
+					-moz-user-select: none;
+					-ms-user-select: none;
+					user-select: none;
+					outline: none;
+					display: inline-flex;
+					justify-content: center;
+					align-items: center;
+					text-align: center;
+					line-height: 1;
+					font-size: inherit;
+					height: 2.6em;
+					padding: 0 2em;
+					border: 0;
+					text-decoration: none;
+					border-radius: 0.25em;
+				}
+				#hotels-set .buttonlike:active {
+					-webkit-transform: translateY(2px);
+					-moz-transform: translateY(2px);
+					-ms-transform: translateY(2px);
+					-o-transform: translateY(2px);
+					transform: translateY(2px);
+				}
+				#hotels-set .buttonlike.transparent {
+					color: inherit;
+					border: 1px solid currentColor;
+				}
+				#hotels-set .buttonlike.yellow {
+					color: white;
+					background-color: #f0ab00;
+				}
+				#hotels-set .buttonlike.white {
+					color: inherit;
+					background-color: white;
+				}
+				#hotels-set .buttonlike.blue {
+					color: white;
+					background-color: #0093d0;
+				}
+				#hotels-set .buttonlike.deepblue {
+					color: white;
+					background-color: #0f2855;
+				}
+				#hotels-set .buttonlike.red {
+					color: white;
+					background-color: #d7232a;
+				}
+				#hotels-set.shown {
+					opacity: 1;
+					transform: none;
+				}
+				#hotels-set .group-filters {
+					display: flex;
+					justify-content: center;
+					flex-wrap: wrap;
+				}
+				#hotels-set .group-filters > * {
+					flex: 0 1 auto;
+					margin: 0.5em 1em;
+					-webkit-transition: color 0.5s, bacgground 0.5s;
+					-moz-transition: color 0.5s, bacgground 0.5s;
+					-ms-transition: color 0.5s, bacgground 0.5s;
+					-o-transition: color 0.5s, bacgground 0.5s;
+					transition: color 0.5s, bacgground 0.5s;
+					cursor: pointer;
+				}
+				#hotels-set .group-filters > *[data-group="*"] {
+					flex-grow: 1;
+				}
+				#hotels-set .group-filters > *.selected {
+					pointer-events: none;
+					color: white;
+					background-color: #0e2855;
+				}
+				#hotels-set .cards-grid .card-cell {
+					display: flex;
+					flex-direction: column;
+					width: 25%;
+					padding: 1em;
+					min-height: 0;
+				}
+				@media screen and (max-width: 1280px) {
+					#hotels-set .cards-grid .card-cell {
+						width: 33.33333333%;
+					}
+				}
+				@media screen and (max-width: 768px) {
+					#hotels-set .cards-grid .card-cell {
+						width: 50%;
+					}
+				}
+				@media screen and (max-width: 576px) {
+					#hotels-set .cards-grid .card-cell {
+						width: 100%;
+					}
+				}
+				#hotels-set .cards-grid .card-cell > .pad {
+					position: relative;
+					flex: 1;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					background-color: white;
+					border-radius: 1em;
+					overflow: hidden;
+				}
+				#hotels-set .cards-grid .card-cell > .pad > * {
+					max-width: 100%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .visual {
+					width: 100%;
+					position: relative;
+					background: center no-repeat;
+					background-size: cover;
+					border-radius: 1em;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .visual:before {
+					content: "";
+					display: block;
+					padding-top: 56.25%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .visual > * {
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .visual [is="hotel-stars"] {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					filter: drop-shadow(0px -2px 2px #0e2855);
+				}
+				#hotels-set .cards-grid .card-cell > .pad .visual [is="hotel-stars"] .star {
+					width: 1.5em;
+					height: 100%;
+					margin: 0 2px;
+					background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkiIGhlaWdodD0iMjkiIHZpZXdCb3g9IjAgMCAyOSAyOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTkuNjEwMiA4LjIyMDIxTDI3LjUwMTEgOS4zNzk0NUMyNy44MjMzIDkuNDI2NDIgMjguMTI2IDkuNTYxOCAyOC4zNzUyIDkuNzcwNDFDMjguNjI0NSA5Ljk3OTAyIDI4LjgxMDUgMTAuMjUyNiAyOC45MTI0IDEwLjU2MDZDMjkuMDE0MiAxMC44NzAyIDI5LjAyNzUgMTEuMjAxOSAyOC45NTA5IDExLjUxODZDMjguODc0MyAxMS44MzUzIDI4LjcxMDggMTIuMTI0NiAyOC40Nzg2IDEyLjM1NDFMMjIuNzU2NyAxNy45NDI1TDI0LjEwNzUgMjUuOTU4N0MyNC4xNjI2IDI2LjI4MTUgMjQuMTI1NCAyNi42MTMxIDI0LjAwMDIgMjYuOTE1OEMyMy44NzQ5IDI3LjIxODUgMjMuNjY2NiAyNy40Nzk5IDIzLjM5OTIgMjcuNjcwM0MyMy4xMzMgMjcuODYwNyAyMi44MTg4IDI3Ljk3MzMgMjIuNDkxOCAyNy45OTU1QzIyLjE2NDkgMjguMDE3NyAyMS44MzgyIDI3Ljk0ODYgMjEuNTQ4NiAyNy43OTZMMTQuNDk3OCAyNC4wNTMxTDcuNDUyNDYgMjcuNzk4OEM3LjE2MTg3IDI3Ljk1MTUgNi44MzQzMiAyOC4wMjA2IDYuNTA2NDkgMjcuOTk4NEM2LjE3ODY3IDI3Ljk3NjIgNS44NjM1NCAyNy44NjM1IDUuNTk2NDEgMjcuNjczQzUuMzI5NjUgMjcuNDgyMiA1LjEyMjI0IDI3LjIyMDUgNC45OTc5MyAyNi45MTc4QzQuODczNjIgMjYuNjE1MSA0LjgzNzQ0IDI2LjI4MzcgNC44OTM1MiAyNS45NjE1TDYuMjQ0MzggMTcuOTQ1MkwwLjUyMDgxNCAxMi4zNTQxQzAuMjg4ODI0IDEyLjEyNDUgMC4xMjU0NjcgMTEuODM1MiAwLjA0ODk2MzggMTEuNTE4NUMtMC4wMjc1Mzk3IDExLjIwMTggLTAuMDE0MTgyMSAxMC44NzAxIDAuMDg3NTUxIDEwLjU2MDZDMC4xODg5MDggMTAuMjUyIDAuMzc0OTU4IDkuOTc3ODYgMC42MjQ2NTQgOS43NjkxM0MwLjg3NDM1IDkuNTYwNCAxLjE3NzczIDkuNDI1NDEgMS41MDA0NiA5LjM3OTQ1TDkuMzg0ODUgOC4yMjAyMUwxMi45MjEyIDAuOTg0MjY1QzEzLjA2NDQgMC42ODkyNjIgMTMuMjg4MyAwLjQ0MDQzNiAxMy41NjcgMC4yNjYzNDJDMTMuODQ1OCAwLjA5MjI0ODEgMTQuMTY4MiAtNi4wNjA4OWUtMDUgMTQuNDk3MiA1LjY2NzUzZS0wNkMxNC44MjcyIC0wLjAwMDgzMTUyMyAxNS4xNTA2IDAuMDkxMDk3NiAxNS40MzA0IDAuMjY1MjIxQzE1LjcxMDIgMC40MzkzNDQgMTUuOTM0OSAwLjY4ODU4NiAxNi4wNzg3IDAuOTg0MjY1TDE5LjYxMDIgOC4yMjAyMVoiIGZpbGw9IiNEODI0MkEiLz48L3N2Zz4K")
+						center no-repeat;
+					background-size: contain;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .visual [is="hotel-stars"]:not([data-category*="*"]) {
+					filter: none;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .visual [is="hotel-stars"]:not([data-category*="*"]):after {
+					content: attr(data-category);
+					font-size: 1.2em;
+					font-weight: bold;
+					letter-spacing: 0.05em;
+					color: #d7232a;
+					padding: 0 0.5em;
+					border-radius: 3px;
+					background: white;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .visual .trait {
+					height: 1.5em;
+					top: 100%;
+					transform: translateY(-60%);
+					background-position: center;
+					background-repeat: no-repeat;
+					background-size: auto 100%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info {
+					width: 100%;
+					flex-grow: 1;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					text-align: center;
+					padding: 2em;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info > * {
+					max-width: 100%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info > *:nth-child(n + 2) {
+					margin-top: 1em;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info h3 {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					font-size: 1.2em;
+					line-height: 1.1;
+					height: 2.2em;
+					text-align: inherit;
+					margin: 0;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info h4 {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					font-weight: normal;
+					font-size: 13px;
+					line-height: 1.2;
+					text-align: inherit;
+					margin: 0;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .benefits {
+					width: 100%;
+					display: flex;
+					flex-direction: column;
+					text-align: left;
+					font-weight: normal;
+					margin-bottom: auto;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .benefits > * {
+					max-width: 100%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .benefits > * {
+					display: flex;
+					font-size: 13px;
+					line-height: 1.1;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .benefits > *:nth-child(n + 2) {
+					margin-top: 0.25em;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .benefits > *:before {
+					content: "\25CF";
+					margin-right: 0.5em;
+					color: #d7232a;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .terms {
+					font-weight: normal;
+					line-height: 1;
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: center;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .terms .term-badge {
+					flex: 0 1 auto;
+					display: inline-flex;
+					align-items: center;
+					font-size: 11px;
+					line-height: 1;
+					margin: 2px;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .terms .term-badge .icon {
+					position: relative;
+					flex-shrink: 0;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 2.2em;
+					height: 2.2em;
+					background-color: #eaf2ff;
+					color: #0e2855;
+					font-weight: bold;
+					border-radius: 3px;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .terms .term-badge .icon:before {
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .terms .term-badge .label {
+					display: inline-flex;
+					align-items: center;
+					text-align: left;
+					height: 2.2em;
+					padding: 0 0.5em;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .terms .term-badge.depart-from .icon:before {
+					content: "";
+					background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM1IiBoZWlnaHQ9Ijg3IiB2aWV3Qm94PSIwIDAgMTM1IDg3IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xMzQuNDUxIDEzLjE2OTJDMTM0IDEyLjA5MzQgMTMzLjI5IDExLjEzOTEgMTMyLjMxOSAxMC4zMDYzQzEzMS4zNDkgOS40NzM0NyAxMzAuMjA1IDguODE0MTUgMTI4Ljg4OCA4LjMyODMzQzEyNy41NzEgNy44MDc4MSAxMjYuMTY3IDcuNTEyODUgMTI0LjY3NiA3LjQ0MzQ0QzEyMy4yMjEgNy4zNzQwNCAxMjEuNzk5IDcuNTEyODQgMTIwLjQxMyA3Ljg1OTg2TDg5LjU4MTkgMTUuNjE1NkwzNC40NzA2IDBMMjAuNjkyNyA1LjIwNTJMNjIuMDI2MiAyNi4wMjZMMzQuNDcwNiAzNi40MzY0TDYuOTE0OTEgMjYuMDI2TDAgMzEuMjMxMkwyNy41NTU3IDUyTDEyNy43OTYgMjMuNjMxNkMxMjkuMTEzIDIzLjI4NDYgMTMwLjMwOSAyMi43NDY3IDEzMS4zODMgMjIuMDE4QzEzMi40NTggMjEuMjU0NiAxMzMuMzA3IDIwLjM4NzEgMTMzLjkzMSAxOS40MTU0QzEzNC41NTUgMTguNDQzOCAxMzQuOTAxIDE3LjQyMDEgMTM0Ljk3MSAxNi4zNDQzQzEzNS4wNzUgMTUuMjMzOSAxMzQuOTAxIDE0LjE3NTUgMTM0LjQ1MSAxMy4xNjkyWiIgZmlsbD0iIzBFMjg1NSIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTM1IDg3SDBWODNIMTM1Vjg3WiIgZmlsbD0iIzBFMjg1NSIvPjwvc3ZnPgo=")
+						center no-repeat;
+					background-size: 62%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .terms .term-badge.depart-date .icon:before {
+					content: "";
+					background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNzUiIHZpZXdCb3g9IjAgMCA2NyA3NSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTUuNTkyMSAwSDEzLjcwODdDMTMuNDY4MyAwIDEzLjI0MDQgMC4wNTA0OTk4IDEzLjAxOTYgMC4xMjIyNTZDMTEuOTE2NCAwLjQ4MDA1NSAxMS4xMDA5IDEuNjU3ODkgMTEuMTAwOSAzLjA3MDc4VjQuMzY3MzFWNy42ODU5MlY5LjQxMjQ5QzExLjEwMDkgOS43MzMzMSAxMS4xNTQzIDEwLjAzNjQgMTEuMjMxOCAxMC4zMjY2QzExLjU2MzggMTEuNTczMyAxMi41NDA4IDEyLjQ4MzMgMTMuNzA4NyAxMi40ODMzSDE1LjU5MjFDMTcuMDMyNyAxMi40ODMzIDE4LjE5OTkgMTEuMTA4NiAxOC4xOTk5IDkuNDEyNDlWNy42ODU5MlY0LjM2NzMxVjMuMDcwNzhDMTguMTk5OSAxLjM3NDY3IDE3LjAzMjcgMCAxNS41OTIxIDBaIiBmaWxsPSIjMEUyODU1Ii8+PHBhdGggZD0iTTUyLjY2NDcgMEg1MC43ODEzQzQ5LjM0MDcgMCA0OC4xNzM0IDEuMzc0NjcgNDguMTczNCAzLjA3MDc4VjQuMzY3MzFWNy42ODU5MlY5LjQxMjQ5QzQ4LjE3MzQgMTEuMTA4NiA0OS4zNDA3IDEyLjQ4MzMgNTAuNzgxMyAxMi40ODMzSDUyLjY2NDdDNTQuMTA1MyAxMi40ODMzIDU1LjI3MjUgMTEuMTA4NiA1NS4yNzI1IDkuNDEyNDlWNy42ODU5MlY0LjM2NzMxVjMuMDcwNzhDNTUuMjcxOSAxLjM3NDY3IDU0LjEwNDcgMCA1Mi42NjQ3IDBaIiBmaWxsPSIjMEUyODU1Ii8+PHBhdGggZD0iTTYyLjI4NTIgNy42ODU5MUg1Ny42MjE4VjkuNDEyNDlDNTcuNjIxOCAxMi40MDE2IDU1LjM5NzYgMTQuODMzMiA1Mi42NjQxIDE0LjgzMzJINTAuNzgwNkM0OC4wNDcxIDE0LjgzMzIgNDUuODIyOSAxMi40MDE2IDQ1LjgyMjkgOS40MTI0OVY3LjY4NTkxSDIwLjU0OThWOS40MTI0OUMyMC41NDk4IDEyLjQwMTYgMTguMzI1NiAxNC44MzMyIDE1LjU5MjEgMTQuODMzMkgxMy43MDg3QzEwLjk3NSAxNC44MzMyIDguNzUwOTYgMTIuNDAxNiA4Ljc1MDk2IDkuNDEyNDlWNy42ODU5MUg0LjY4NzUxQzIuMDk5MTIgNy42ODU5MSAwIDkuNjUzOTMgMCAxMi4wODAzVjcwLjYwNTdDMCA3My4wMzY1IDIuMDk5IDc1IDQuNjg3NTEgNzVINjIuMjg0NkM2NC44NzU0IDc1IDY2Ljk3MiA3My4wMzYgNjYuOTcyIDcwLjYwNTdWMTIuMDgwOUM2Ni45NzI2IDkuNjU0NTQgNjQuODc2IDcuNjg1OTEgNjIuMjg1MiA3LjY4NTkxWk02MC44MzE4IDY4LjU0OTRMNS45Njk5MSA2OC41MjgzVjIxLjM0NDdINjAuODMxOFY2OC41NDk0WiIgZmlsbD0iIzBFMjg1NSIvPjxwYXRoIGQ9Ik0zOS4zNjE0IDMyLjcxNTNINTMuNzg5OUM1NS4wNDIzIDMyLjcxNTMgNTYuMDU1MiAzMS40NjQ2IDU2LjA1NTIgMjkuOTE4OEM1Ni4wNTUyIDI4LjM3MzEgNTUuMDQxOCAyNy4xMjI0IDUzLjc4OTkgMjcuMTIyNEgzOS4zNjE0QzM4LjEwOSAyNy4xMjI0IDM3LjA5NjEgMjguMzczMSAzNy4wOTYxIDI5LjkxODhDMzcuMDk2MSAzMS40NjM5IDM4LjEwODkgMzIuNzE1MyAzOS4zNjE0IDMyLjcxNTNaIiBmaWxsPSIjMEUyODU1Ii8+PHBhdGggZD0iTTM5LjM2MTQgNDIuODE2M0g1My43ODk5QzU1LjA0MjMgNDIuODE2MyA1Ni4wNTUyIDQxLjU2NTYgNTYuMDU1MiA0MC4wMTk5QzU2LjA1NTIgMzguNDc0MyA1NS4wNDE4IDM3LjIyMzYgNTMuNzg5OSAzNy4yMjM2SDM5LjM2MTRDMzguMTA5IDM3LjIyMzYgMzcuMDk2MSAzOC40NzQzIDM3LjA5NjEgNDAuMDE5OUMzNy4wOTYxIDQxLjU2NTYgMzguMTA4OSA0Mi44MTYzIDM5LjM2MTQgNDIuODE2M1oiIGZpbGw9IiMwRTI4NTUiLz48cGF0aCBkPSJNMzkuMzYxNCA1Mi45MTczSDUzLjc4OTlDNTUuMDQyMyA1Mi45MTczIDU2LjA1NTIgNTEuNjY2NSA1Ni4wNTUyIDUwLjEyMDlDNTYuMDU1MiA0OC41NzUzIDU1LjA0MTggNDcuMzI0NSA1My43ODk5IDQ3LjMyNDVIMzkuMzYxNEMzOC4xMDkgNDcuMzI0NSAzNy4wOTYxIDQ4LjU3NTMgMzcuMDk2MSA1MC4xMjA5QzM3LjA5NjEgNTEuNjY2NSAzOC4xMDg5IDUyLjkxNzMgMzkuMzYxNCA1Mi45MTczWiIgZmlsbD0iIzBFMjg1NSIvPjxwYXRoIGQ9Ik0zOS4zNjE0IDYzLjAxOUg1My43ODk5QzU1LjA0MjMgNjMuMDE5IDU2LjA1NTIgNjEuNzY4MiA1Ni4wNTUyIDYwLjIyMjZDNTYuMDU1MiA1OC42NzY5IDU1LjA0MTggNTcuNDI2MiA1My43ODk5IDU3LjQyNjJIMzkuMzYxNEMzOC4xMDkgNTcuNDI2MiAzNy4wOTYxIDU4LjY3NjkgMzcuMDk2MSA2MC4yMjI2QzM3LjA5NjEgNjEuNzY4MiAzOC4xMDg5IDYzLjAxOSAzOS4zNjE0IDYzLjAxOVoiIGZpbGw9IiMwRTI4NTUiLz48cGF0aCBkPSJNMTMuODA2MiAzMi43MTUzSDI4LjIzNDZDMjkuNDg3MSAzMi43MTUzIDMwLjQ5OTkgMzEuNDY0NiAzMC40OTk5IDI5LjkxODhDMzAuNDk5OSAyOC4zNzMxIDI5LjQ4NjQgMjcuMTIyNCAyOC4yMzQ2IDI3LjEyMjRIMTMuODA2MkMxMi41NTM3IDI3LjEyMjQgMTEuNTQwOCAyOC4zNzMxIDExLjU0MDggMjkuOTE4OEMxMS41NDEgMzEuNDYzOSAxMi41NTM3IDMyLjcxNTMgMTMuODA2MiAzMi43MTUzWiIgZmlsbD0iIzBFMjg1NSIvPjxwYXRoIGQ9Ik0xMy44MDYyIDQyLjgxNjNIMjguMjM0NkMyOS40ODcxIDQyLjgxNjMgMzAuNDk5OSA0MS41NjU2IDMwLjQ5OTkgNDAuMDE5OUMzMC40OTk5IDM4LjQ3NDMgMjkuNDg2NCAzNy4yMjM2IDI4LjIzNDYgMzcuMjIzNkgxMy44MDYyQzEyLjU1MzcgMzcuMjIzNiAxMS41NDA4IDM4LjQ3NDMgMTEuNTQwOCA0MC4wMTk5QzExLjU0MSA0MS41NjU2IDEyLjU1MzcgNDIuODE2MyAxMy44MDYyIDQyLjgxNjNaIiBmaWxsPSIjMEUyODU1Ii8+PHBhdGggZD0iTTEzLjgwNjIgNTIuOTE3M0gyOC4yMzQ2QzI5LjQ4NzEgNTIuOTE3MyAzMC40OTk5IDUxLjY2NjUgMzAuNDk5OSA1MC4xMjA5QzMwLjQ5OTkgNDguNTc1MyAyOS40ODY0IDQ3LjMyNDUgMjguMjM0NiA0Ny4zMjQ1SDEzLjgwNjJDMTIuNTUzNyA0Ny4zMjQ1IDExLjU0MDggNDguNTc1MyAxMS41NDA4IDUwLjEyMDlDMTEuNTQwOCA1MS42NjY1IDEyLjU1MzcgNTIuOTE3MyAxMy44MDYyIDUyLjkxNzNaIiBmaWxsPSIjMEUyODU1Ii8+PHBhdGggZD0iTTEzLjgwNjIgNjMuMDE5SDI4LjIzNDZDMjkuNDg3MSA2My4wMTkgMzAuNDk5OSA2MS43NjgyIDMwLjQ5OTkgNjAuMjIyNkMzMC40OTk5IDU4LjY3NjkgMjkuNDg2NCA1Ny40MjYyIDI4LjIzNDYgNTcuNDI2MkgxMy44MDYyQzEyLjU1MzcgNTcuNDI2MiAxMS41NDA4IDU4LjY3NjkgMTEuNTQwOCA2MC4yMjI2QzExLjU0MSA2MS43NjgyIDEyLjU1MzcgNjMuMDE5IDEzLjgwNjIgNjMuMDE5WiIgZmlsbD0iIzBFMjg1NSIvPjwvc3ZnPgo=")
+						center no-repeat;
+					background-size: 50%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .terms .term-badge.meal .icon:before {
+					content: "";
+					background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDUiIGhlaWdodD0iNDMiIHZpZXdCb3g9IjAgMCA0NSA0MyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNDMuNjkwMiAzLjczNDM3QzQzLjI1IDMuMjk0MSA0Mi42NjQ0IDMuMDEyNjkgNDIuMDQ3MSAyLjk1MzY5QzQwLjg5ODggMi44NDAyMSAzNy43NTM0IDQuNjc4NDYgMzUuOTgzMiA1Ljc4NTk1QzMzLjQ0NiA3LjM3MDAyIDI5LjYyNDIgMTAuMDU3IDI1LjgyOTcgMTMuODUxNkwxNy41MjM1IDIyLjE1MzJDMTYuNDY2IDIzLjIxMDggMTYuNDY2IDI0LjkzMSAxNy41MjM1IDI1Ljk4ODZMMTcuNTY0NCAyNi4wMjQ5TDYuMTY3MjIgMzcuNDIyQzUuMTA5NjYgMzguNDc5NiA1LjEwOTY2IDQwLjE5OTggNi4xNjcyMiA0MS4yNTc0QzcuMjI0NzkgNDIuMzE0OSA4Ljk0NTAzIDQyLjMxNDkgMTAuMDAyNiA0MS4yNTc0TDQzLjY5MDIgNy41Njk3NEM0NC40MjU1IDYuODM0NDQgNDQuNjc1MiA1LjcyMjQxIDQ0LjMyNTcgNC43NDIwMUM0NC4xOTg2IDQuMzY1MjggNDMuOTc2MiA0LjAxNTc5IDQzLjY5MDIgMy43MzQzN1oiIGZpbGw9IiMwRTI4NTUiLz48cGF0aCBkPSJNMjguNzk4MSAyNS4yMzA1TDI0Ljk2MjggMjkuMDY1OUwzNi44NzI4IDQwLjk3NTlDMzcuOTMwNCA0Mi4wMzM1IDM5LjY1MDYgNDIuMDMzNSA0MC43MDM2IDQwLjk3NTlDNDEuNzYxMiAzOS45MTg0IDQxLjc2MTIgMzguMTk4MSA0MC43MDM2IDM3LjE0MDZMMjguNzk4MSAyNS4yMzA1WiIgZmlsbD0iIzBFMjg1NSIvPjxwYXRoIGQ9Ik0xMy40MjQ5IDE3LjQ0NjRMMTYuNDAyNCAyMC40MjM5TDIwLjE4MzMgMTYuNjQzTDE3LjM1MSAxMy44MTA3QzE3Ljg3MyAxMi4wMzYgMTcuNDM3MyAxMC4wMzQzIDE2LjAzOTMgOC42MzYzN0MxNi4wMjU3IDguNjIyNzYgMTYuMDA3NSA4LjYxMzY4IDE1Ljk5MzkgOC42MDAwNkMxNS45ODAzIDguNTg2NDQgMTUuOTcxMiA4LjU2ODI5IDE1Ljk1NzYgOC41NTQ2N0w3LjY2NTA1IDAuMjYyMTIxQzcuMzE1NTYgLTAuMDg3MzczNiA2Ljc1MjczIC0wLjA4NzM3MzYgNi40MDMyNCAwLjI2MjEyMUM2LjA1Mzc0IDAuNjExNjE1IDYuMDUzNzQgMS4xNzQ0NCA2LjQwMzI0IDEuNTIzOTNMMTQuMTA1NyA5LjIyMTg5QzE0LjEwNTcgOS4yMjE4OSAxNC4xMTAzIDkuMjI2NDMgMTQuMTE0OCA5LjIyNjQzQzE0LjMzMjcgOS40NDQyOSAxNC4zMzI3IDkuNzkzNzkgMTQuMTE0OCAxMC4wMTE3QzEzLjg5NjkgMTAuMjI5NSAxMy41NDc1IDEwLjIyOTUgMTMuMzI5NiAxMC4wMTE3TDEzLjMyNSAxMC4wMDcxTDUuNjE4MDEgMi4zMDQ2MkM1LjI2ODUyIDEuOTU1MTMgNC43MDU2OSAxLjk1NTEzIDQuMzU2MiAyLjMwNDYyQzQuMDA2NyAyLjY1NDEyIDQuMDA2NyAzLjIxNjk0IDQuMzU2MiAzLjU2NjQzTDEyLjA1ODcgMTEuMjczNUMxMi4wNTg3IDExLjI3MzUgMTIuMDYzMiAxMS4yNzM1IDEyLjA2MzIgMTEuMjc4QzEyLjI4MTEgMTEuNDk1OSAxMi4yODExIDExLjg0NTQgMTIuMDYzMiAxMi4wNjMyQzExLjg0NTQgMTIuMjgxMSAxMS40OTU5IDEyLjI4MTEgMTEuMjc4IDEyLjA2MzJDMTEuMjc4IDEyLjA2MzIgMTEuMjc4IDEyLjA1ODcgMTEuMjczNSAxMi4wNTg3TDMuNTcwOTcgNC4zNTE2NkMzLjIyMTQ4IDQuMDAyMTcgMi42NTg2NSA0LjAwMjE3IDIuMzA5MTYgNC4zNTE2NkMxLjk1OTY3IDQuNzAxMTUgMS45NTk2NyA1LjI2Mzk4IDIuMzA5MTYgNS42MTM0N0wxMC4wMTE3IDEzLjMxNkwxMC4wMTYyIDEzLjMyMDVDMTAuMjM0MSAxMy41Mzg0IDEwLjIzNDEgMTMuODg3OSAxMC4wMTYyIDE0LjEwNTdDOS43OTgzMyAxNC4zMjM2IDkuNDQ4ODMgMTQuMzIzNiA5LjIzMDk3IDE0LjEwNTdDOS4yMzA5NyAxNC4xMDU3IDkuMjMwOTcgMTQuMTAxMiA5LjIyNjQzIDE0LjEwMTJWMTQuMTA1N0wxLjUyMzkzIDYuMzk4N0MxLjE3ODk4IDYuMDQ5MiAwLjYxMTYxNSA2LjA0OTIgMC4yNjIxMjEgNi4zOTg3Qy0wLjA4NzM3MzYgNi43NDgxOSAtMC4wODczNzM2IDcuMzExMDIgMC4yNjIxMjEgNy42NjA1MUw4LjU1OTIxIDE1Ljk1NzZDOC41NzI4MyAxNS45NzEyIDguNTkwOTggMTUuOTgwMyA4LjYwNDYgMTUuOTkzOUM4LjYxODIyIDE2LjAwNzUgOC42MjcyOSAxNi4wMjU3IDguNjQwOTEgMTYuMDM5M0M5LjkzOTAzIDE3LjMzMjkgMTEuNzU0NiAxNy44MDA0IDEzLjQyNDkgMTcuNDQ2NFoiIGZpbGw9IiMwRTI4NTUiLz48cGF0aCBkPSJNNDAuMjA0NCAzNi42Njg2TDI5LjMyMDEgMjUuNzc5OEwyNS41MzkyIDI5LjU1NjFMMzYuNDI4IDQwLjQ0NDlDMzcuNDcyIDQxLjQ4ODkgMzkuMTY1IDQxLjQ4ODkgNDAuMjA4OSA0MC40NDQ5QzQxLjI0ODMgMzkuNDA1NSA0MS4yNDgzIDM3LjcwOCA0MC4yMDQ0IDM2LjY2ODZaIiBmaWxsPSIjMEUyODU1Ii8+PC9zdmc+Cg==")
+						center no-repeat;
+					background-size: 62%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .price-info {
+					display: flex;
+					align-items: baseline;
+					justify-content: center;
+					font-weight: bold;
+					font-size: 1.5em;
+					padding-top: 0.66em;
+					margin-top: auto;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .price-info.from:before {
+					content: "от ";
+					font-weight: normal;
+					font-size: 66%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .price-info:after {
+					font-weight: normal;
+					font-size: 66%;
+				}
+				#hotels-set .cards-grid .card-cell > .pad .info .actions .buttonlike {
+					font-size: 13px;
+					text-transform: uppercase;
+				}
+				@media screen and (max-width: 576px) {
+					#hotels-set .cards-grid .card-cell > .pad .info .actions .buttonlike {
+						font-size: 12px;
+					}
+				}
+			</style>
+			<div id="hotels-set" data-component-instance="0cbc6286-1b02-47a3-90b4-35eb188eba8c">
+				<div class="group-filters">
+					<button class="buttonlike white selected" data-group="*">Все отели</button>
+					<button class="buttonlike white tab-metric" data-group="Шарм-эль-Шейх">Шарм-эль-Шейх</button>
+					<button class="buttonlike white tab-metric" data-group="Хургада">Хургада</button>
+				</div>
+				<div class="cards-grid">
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/3913/637745649608303271.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">FARAANA HEIGHTS RESORT</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">16.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">58 126</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/faraana-heights-resort-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2216.09.2022%22%2c%22End%22%3a%2216.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%220A5bJETGn%2b3Tw5T3KCP1bea9RXFytQvFn33WiwlKlAgjRu1HYL0wRKBym7QuSjT1q4lR%2bUbtXPMYPZVjxVTLm9HxUJGNju%2fY2iKGMDHj93QJQRtHWhfBGzPwUPc010McBEQCLaTD7f6ecSNj7fNAUnjhKFgv7ifh2jT7y4V8PYc%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/128/637340601982733137.png')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">PANORAMA NAAMA HEIGHTS AQUA PARK RESORT</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">16.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">60 198</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/panorama-naama-heights-aqua-park-resort-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2216.09.2022%22%2c%22End%22%3a%2216.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22s8HqDgzqCukjuwxY0UpoJL4fL74kx46OMaclZ5jSQEpt%2bKmb3wToBkplTkhzxGy0nqupqvUpit8OVRKrQ16cga18QMFtNUfWTc6K7FSppysaSOLFSbNTcvXTfgRgZZstFCB2XI77imDz9%2fI09QPWOA2mT37ljM4nOk9tZ0YSWtUaUYP5a66E24nQFDn%2bauDr%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/9008/636570112361703787.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">GAFY RESORT &amp; AQUA PARK</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">16.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">61 235</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/gafy-resort-aqua-park-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2216.09.2022%22%2c%22End%22%3a%2216.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22pqurIfifLyXf7vUVMPkrlbfqe2IT9YxLjYYk%2ft%2bcrT8m6PkfwF%2fBFn2wMWJUA8PbYtjAfqPcZyAuDxnQ%2boZwLfSUoltrW9rmqNZGsTikOkBIENAD2aT%2bE9S%2bMaJsUthL74drcLg71ZVk4o6D68XQodQQN%2bcaVqSNvJ10xCISMuE%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/152/636854045490848711.jpg')">
+								<div is="hotel-stars" class="trait" data-category="2 *"><span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">PALMYRA AMAR EL ZAMAN AQUA PARK</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">63 308</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/palmyra-amar-el-zaman-aqua-park-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22qp%2fuvJkRO%2fw9RbwBibetUBDOBJm%2bxbiYl6wKhS1bKoI0QdxCW7rfqvcHW63FBOrMM99R1yIZBb4EuP2VdMo5GBPPIYTt68fhvuznUHzrsx5uOO9B%2b0vFuBYOodW6CcYdQqVOeqkjF5seu3KqNZoTMjdTYxE2%2fW2Ayrwo242Jlx0%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/3743/637892759009524766.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ALBATROS ROYAL GRAND SHARM</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">16.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">97 903</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/albatros-royal-grand-sharm-resort-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2216.09.2022%22%2c%22End%22%3a%2216.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22cJPq7JQJj0iG10056OkKCGE0eJR4PUx2iwOrAaG33YEXzsm06SfFuEy3CeyIxFCxO7MQEoeRL7tiNeeVRL6Klj4fv4U1ENKlxy1IFWTQAYD0j6q%2bb1z7DQ8w4%2bK7nLD22iF0QNt27r5NeccyXth%2fkveUwuOIi4cQBIFQWfQB%2fpD3Ts7eo9sz3w63abQENSUr%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3atrue%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/1600x900/media/image/12/50799/637954673312926174.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">DOMINA CORAL BAY RESORT</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">27.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">78 896</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/domina-coral-bay-resort-sharm-el-sheikh/?q=%7B%22Bgn%22%3A%2227.09.2022%22%2C%22End%22%3A%2227.09.2022%22%2C%22Dr%22%3A%220%22%2C%22Acc%22%3A%227%22%2C%22Gest%22%3A%221%22%2C%22Q%22%3A%22RM20sLeiBnN3gMPOZi1E7jLXYWlmFrjhE%2FbmsNhA6n7kCfWEYSzltF2J9s%2BNeE%2FzUs8yVCW21i2lIzmKJfRPypK0red%2FGLhiJz3L7R7XxfxR%2B6pHJq2sFnUma32DbqluaVAQjwrYN7rowXxOw0x7wY%2FdY%2BAFohcICNL4TgdDGhE%3D%22%2C%22Ts%22%3A0%2C%22Las%22%3Afalse%2C%22AcId%22%3A0%2C%22FDate%22%3A%220001-01-01T00%3A00%3A00Z%22%2C%22Ref%22%3Afalse%2C%22Pstatus%22%3Afalse%2C%22TransferPrice%22%3A0%2C%22Chr%22%3Atrue%2C%22Rglr%22%3Afalse%2C%22Srt%22%3A1%7D"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/1600x900/media/image/12/4086/636466025542099036.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">IL MERCATO RESORT</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Полупансион</span> </span>
+								</div>
+								<div class="price-info from rur per-person">65 653</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/il-mercato-resort-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22n3%2bJMBSSgtEr8CM3VWw57%2f1AkHV5uJQmi3Fy1QUpFmtE%2bK0ycQDviJR9SzaJC%2bpojoiYpB%2fcSqVUsGaSt8HRj0Mk7yyzALEfUomnw0bfr7ixEx9rc05Y2B81w06%2bhbADPbehFB%2feBKT7miy9YLoiMBop9BVN6GHf8Gv%2bbJfWmrI%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/1600x900/media/image/12/7601/637636863795431782.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ISLAND VIEW</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">74 744</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/island-view-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22d3S3EX7a4I4psuNQ4oFz8f%2bBYCtvCuOWMxAKVKPA2vTHDQZESHulQd6ZCzmeYShFVjufx1biEFT%2beJsZZ714ETJvaz96UpAJvK3HKI6Yju%2fedoC95AZxjldDY8Zl%2fhoG%2bizB2A0zwr%2bfKWVKiRFwXA%3d%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/118/636500715158247403.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">JOLIE VILLE GOLF & RESORT</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">82 569</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/jolie-ville-golf-resort-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22b735yiEzLtgfKLZ6Zjf4uUKrkN8N1ZhFzkHNe4fyAHQ72DzgsaWNVYpFQe5wGXHHPqCrHZ4l9%2f6sNJ%2fXXJXJBRyy0yv8%2b0moZJzhfBzNDl4%2fnoRUFXankVfSnILAJPSJZrpHuWaE8sPTU2XLgYeXRLyI69x5owgBF5zuSgGFu3o%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/10796/637898656975760303.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">MONTE CARLO SHARM RESORT SPA & AQUA PARK</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">08.10.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все включено 24 часа</span> </span>
+								</div>
+								<div class="price-info from rur per-person">77 548</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/monte-carlo-sharm-resort-spa-aqua-park-sharm-el-sheikh/?q=%7B%22Bgn%22%3A%2208.10.2022%22%2C%22End%22%3A%2208.10.2022%22%2C%22Dr%22%3A%220%22%2C%22Acc%22%3A%227%22%2C%22Gest%22%3A%221%22%2C%22Q%22%3A%22yPEywm4dVG%2BupuiWdrd3WgWk8P0yKrV9XE5vObKxOrplaMiX%2BZgl4eQF1Yf8Lj0WLxesRjQt2flRnPpPIkel4CfMTBn5ZfIyxEqkLhiLdIVJUEThap1bNpUW7xCxA%2BConN4ErRUKSC3HA3WgCOVRlYckVFpA2O1eoVFeCbCinhrYKTEZJjMt756vVYXzT0SF%22%2C%22Ts%22%3A0%2C%22Las%22%3Afalse%2C%22AcId%22%3A0%2C%22FDate%22%3A%220001-01-01T00%3A00%3A00Z%22%2C%22Ref%22%3Afalse%2C%22Pstatus%22%3Afalse%2C%22TransferPrice%22%3A0%2C%22Chr%22%3Atrue%2C%22Rglr%22%3Afalse%2C%22Srt%22%3A1%7D"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/142/637636955812586136.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">MOVENPICK RESORT SHARM EL SHEIKH</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">94 506</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/movenpick-resort-sharm-el-sheikh-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22MlG8X5hPzfKqw340qvxSrQyWm%2bcaNessgdSYF9JmFCZRPpvPnU8LnhkGdx5AnGmsB44JFiMOM7lbDAKWtDDYBf4nF3tDyXXJaOzqLFGbJ7%2bWLx8DmOGCCYT2oSwG5WMLOBeKdaqkh0EsaBa%2bbxuGy8FvrPIdReHLFvYFCoIw%2bG753hMUyZBfjCneFQk8Tt6C%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3atrue%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/126/637592826318900774.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">NUBIAN ISLAND</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">100 987</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/nubian-island-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22meKGbsUesDNUcdZ2UJ2jnK2IDI0tqRcp8%2fX%2b%2bx%2bHIMNfVdDxbiyGL1oyqeY5ielfJd9jLSjxrmdGA00E%2fHqXOWnpkrqJqAf66vnEeXTJNDLv1KgJBVCuidm0w0x4vFV6vmSmXHnN5%2bX94LOPETZLbA%3d%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/127/637581736344742323.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">NUBIAN VILLAGE</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">136 822</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/nubian-village-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22fT5K45ELfY%2fWuafmsGNHTEApoDcuCCviz0J5n4tiKvhnvmDLh8x0GqKsJDVpX7ajyghT3FZax19VnipHrOpcie29FOptppTZdKH6v3LhZQUzgCJ84o%2fqBnsxMQ6OpDX0kWtDHhjhiXl8THvgEgzl95I82c4g7vUDb4qvE8Msq58%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/133/636479072188198586.JPG')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">REHANA ROYAL BEACH RESORT AQUA PARK & SPA</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">82 648</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/rehana-royal-beach-resort-aqua-park-spa-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22z8ds09gk%2fq5hPnBE72NBb%2f2dXyFyA62laVnkcQbWg0P77%2fHbO%2bNeDHoyQ6PF9vIWX1hDd3W6C7aehqmjtNh037MODVTxQQsmYfe2TdHqh9bw11XJgrRri62Xc2PpDqDVCSX0jURdTm%2bDxl1AhKV9f3xcC0c5Vcl103CxNwWJxOkR1y2W8gGmgEA%2b7baKDbq6%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/23179/637347489404601809.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">MARLIN INN AZUR RESORT</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">11.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">63 826</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/marlin-inn-azur-resort-hurghada/?q=%7b%22Bgn%22%3a%2211.09.2022%22%2c%22End%22%3a%2211.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22oYL4xiy9HaaRROfdY4jTjAdtP%2b9WS6VJ25CmGZ9W34QX2LtipBM%2fNQeP%2fplS1W0ZOHmfYh%2fnlpWrVkQSPBFgVRfc%2f9wjtkQ6c3FxC6c4h8FoFEX0Jimxyd6kfq%2beRD%2bZc57gu%2bOPMHX%2bCjS4NxGysSHJYbsGNzdVjUA7ijAal5o%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/3939/636475208263032967.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ALBATROS BEACH CLUB ABU SOMA</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">11.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">74 744</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/albatros-beach-club-abu-soma-hurghada/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22yCi2capLMgqAtuDArJyBu8iftH7GhnMaF66sq2aFssp1oMO7JCNSTxrdNvXepiM7%2fvzIOp5tXGgkSSX60GyTQ5KHZsoA5K0YdwEpPpnsReBuf4k1%2f9rXAnexnVn2%2bjUxmmb3VmbiH2L5hYoAS5Fv4YB%2f2xQS403rskO14rqkWHw%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/19935/636912075075454739.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ALBATROS DANA BEACH RESORT</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">102 410</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/albatros-dana-beach-resort-hurghada/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%229w9WwtKK6nDAud47YGNJT3RBUCpz9wkCee9SysyUr3U0epnohnzanAxlc9p6F1sldoapBmRvMD3xZ9qNYyEdvJfECorrxc7fUqD9e9CZIA9Duh4%2fmtWYppiTdnISDEsyVcWUflh6RvRhdY%2fJF8p0Ds%2bOOd4WQPGVdLFxEA4sH6s%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/19938/637338766827074432.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ALBATROS JUNGLE AQUA PARK</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">78 696</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/albatros-jungle-aqua-park-hurghada/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22bO8dW5jAYumaJtS3bkLN2DSi7LhTT2YSLy%2fX1P4eBzSy%2bA6IGjceIdY7y4fDE1ToxSY9DUickRigEIK6edAvqjP1UhwlJ78DJXMtc0%2fVuTbCGYH97%2bCQGm5kPAFZgRKVCpHued8MTPcK32H9DoyAjlHqpf13livAOPaTnTe1Vj8%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/6122/637914960050383255.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ARABIA AZUR BEACH RESORT</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">16.10.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">80 236</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/arabia-azur-beach-resort-hurghada/?q=%7B%22Bgn%22%3A%2216.10.2022%22%2C%22End%22%3A%2216.10.2022%22%2C%22Dr%22%3A%220%22%2C%22Acc%22%3A%227%22%2C%22Gest%22%3A%221%22%2C%22Q%22%3A%22FDRS7uB20FZqP1OxbWGuHgwC4p6Ap%2BZRKeUEVNYBNBJ8Bx6U3fS8zSHY1frLP2CaISlm%2FIcaIAxW3UcBBYTu6ZfaPcDRnhMM5ey0tDaOkT0siuVUBFieUwQ1369uInqpFSIosD%2BQe6kXKKdtG9mrbukl%2BCBhjqiOfSWY75PlCpk%3D%22%2C%22Ts%22%3A0%2C%22Las%22%3Afalse%2C%22AcId%22%3A0%2C%22FDate%22%3A%220001-01-01T00%3A00%3A00Z%22%2C%22Ref%22%3Afalse%2C%22Pstatus%22%3Afalse%2C%22TransferPrice%22%3A0%2C%22Chr%22%3Atrue%2C%22Rglr%22%3Afalse%2C%22Srt%22%3A1%7D"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/17956/637723090498962073.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">MENAVILLE RESORT</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">66 707</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/menaville-resort-hurghada/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22Sc7FdRkq%2fDnk%2fJ0Aau2vO89p2R39y0MgeWkA%2fue6anUaY4DQ%2ft%2fKsAQ6p%2bqBF%2fzRmQH9Bpvm%2fXp0WFmPoDKfOu3EjW1634iUfFf6bz%2f3pp7lsLt0WJWvGzjHt%2fOruuhwPuPZehEi2iPtog2L1kg%2bLOprFAhdzKALijw%2bn33OajM%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3atrue%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/9305/637299072828326625.JPG')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">NUBIA AQUA BEACH RESORT</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">66 707</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/nubia-aqua-beach-resort-hurghada/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22MYLRXHUqi6V2AXLlHhn62aSJPmWMdRyB3XTYmUo4TLaTZhuqz1ID2czmDg3YFzqre7c8JHajdmfro5tMNifVw%2b32mxR5dcjtk7%2blqBg4Nr9Hr9W%2fOpgrBQO%2fnlW1DJg3XmloHBNgprShG0OBmpZiu544yF0GjpQl7NpaP%2bJfX%2b0%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/88/636641582248198157.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">TIA HEIGHTS MAKADI BAY HOTEL & RESORT</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">69 737</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/tia-heights-makadi-bay-hotel-resort-hurghada/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22qNCFOaKspD6kdU8YpGFTikgQJ1D0D8OPV%2fq4S9qExBn3cUOTFO4ICCxaHsHYFCZdwcOWoVn5y9yqj%2fmfvHv%2bdpd%2b3Q59aruD3%2fRqvxzXoCe3eCKX0I78Rk4tTmXv8rsixVZa1tf%2fHcR%2f7jEv6cV3%2fYAxM8qoZ5xFM875jwk1fVW45godF8SkgH5SZQyYQOmS%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/195/637712072047630622.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">TITANIC BEACH SPA & AQUA PARK</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Ультра Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">94 110</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/titanic-beach-spa-aqua-park-hurghada/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22%2f6zC7T2jKPXwfaMEw%2bxvuegjScNJLnI4TfnAP23ql9tP2g75Xkb27ZLo309BHLRjUX94jE4sNKSX%2bDrtOL011Xc3G6Haoq5m%2bgFDC9%2fivXEU3iFCbp1GRe4CL0Id0INHw0jPjJJZ6xEwpE01WwrZdzt6zoJDPhRkS%2bWMy53DUmM%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/196/636464296546646339.JPG')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">TITANIC PALACE & AQUA PARK BEACH RESORT</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">03.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Ультра Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">95 691</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/titanic-palace-aqua-park-beach-resort-hurghada/?q=%7b%22Bgn%22%3a%2203.09.2022%22%2c%22End%22%3a%2203.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%221%22%2c%22Q%22%3a%22WEXqiLwiesIGl886pHO0FHqThOUynPHclofbjNKECZNLdpBDabjjE8HDZPeyfgvjrzyq2HX6sHfCwS6TA%2bMgfQVIcQ7wGUtxgIjjzjBGZf%2bLUiIdAOys37GyhDqYYnAieCKba0KgJp%2fQBoanzt%2f5JOZ3R3NxDUz2byvgLRqoLj72XWN3LOAIEgqyOLlpxJvb%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/4301/636736561354286043.JPG')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">MIRAGE BAY RESORT &amp; AQUAPARK</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">08.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">64 863</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/mirage-bay-resort-aquapark-hurghada/?q=%7b%22Bgn%22%3a%2208.09.2022%22%2c%22End%22%3a%2208.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22Kq9JBELIhmdG8Pr8xGhmDnUbMrsO0z94x05%2b3ZVNI9rssOmWhTQUab7zm%2fetnkvSbwGZ7TOBBisjYOjn1Jsb3Cpqda1QaovlgHd1VzgXq5xnsl%2fB0E6JzaULBdYT%2fK6RnqH2X1m%2fEgLYgJ%2fdZlZele%2fxH9LTPt%2fkZCimJ7NQYBU%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/94/636913063605243838.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">PYRAMISA BEACH RESORT SAHL HASHEESH</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">05.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">65 899</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/pyramisa-beach-resort-sahl-hasheesh-hurghada/?q=%7b%22Bgn%22%3a%2205.09.2022%22%2c%22End%22%3a%2205.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%227%2b%2bDhli7HaYYPfjILiXMi0mGERNMlHAuVXqM1r5TX%2bg4B8J6zbDyI%2fn0QE0Wtk5ZcebW7fY1h1pztLlJpa8smHLtg3%2beHYCHfuN3%2fhPStKiHdEp4wHpkC9yPeJlP53qM98DAaIh3sr1%2f7fCf7DAKYFwtkUoEEUEa0Rr5j88bW3W2uyR0caxefE82B6cyEECn%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/13320/636669175326766514.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">OTIUM INN AMPHORAS AQUA RESORT</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">16.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">66 417</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/otium-inn-amphoras-aqua-resort-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2216.09.2022%22%2c%22End%22%3a%2216.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22WQ1pvdbvT5W%2f2cIl7jDfuFYwn08pxyXQ16pJ9dp2uuaEmjCWtcdm5LTwUQT67tbhnZ5uUva5c5NUq2j4XlPIJbQVUFZVJD4VRPZDTlBWIpTL2%2fRX%2b8uH8p%2babxwd%2fZqVlQKEcYD8uoLnICuMDBg94GMfa2Z4IcwJQY%2fUXwt9LT0%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/13319/636625960504707077.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">OTIUM PARK AMPHORAS BLU RESORT</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">16.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">67 454</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/otium-park-amphoras-blu-resort-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2216.09.2022%22%2c%22End%22%3a%2216.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22MCOBkLd723FcPMhB5oaLepnKpn1h%2fWb01nsO0DkmjClZ8VSeZlWBQ9xckUC94iGc%2b7u28ln3U%2fwWNyqf7LwleG1EsWzpLkzGrO2HQHs1Jm%2bdmO98w64NaLaSKrQQdXw8SPTSDC3fMa6F26Fqscvd2zT76NhtwDkzviF5Vhdmpqm252jWiMGrjqJ%2fJE8yfcGL%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/45/636475741097496499.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ALADDIN BEACH RESORT</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">11.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">67 454</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/aladdin-beach-resort-hurghada/?q=%7b%22Bgn%22%3a%2211.09.2022%22%2c%22End%22%3a%2211.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22mEbajoQl5D8t0QeLgWX1THNBJQV%2b%2fDsq4l4M%2fKWMwIn3shYMKTWqlH8pDGfCytPAFaEWzPDjQa5bewldqBfap9Zaq5rLqIvxf%2fHIuyIfrNbT6C3tO%2btqpfpN0wE8CA7htgrB%2fszDdyEG13wLZTLXEgL%2bkA7J4UpfCre9hQA6yMU%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/181/636760672130664569.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">SEAGULL BEACH RESORT &amp; CLUB</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">11.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">67 454</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/seagull-beach-resort-club-hurghada/?q=%7b%22Bgn%22%3a%2211.09.2022%22%2c%22End%22%3a%2211.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22sEEk10R6GN%2f5SDCSgqqgg7ZoiW4XbXjdBw53Qx5D2f87TLgVCqx%2ftyRipJkKzLgY%2fve%2fhP5xq9p8wF8m0SS1OWpbc2mpO%2bpDzKtV6klsJorMvjJ3%2f5jYQX2hVD0TH5kux7LmARW%2bXr9g9QKswuxkNLqYx2%2b%2bQR7isRe57M%2bh7Gk%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/19942/636638810262291197.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ALBATROS ALF LEILA WA LEILA</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">18.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">69 009</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/albatros-alf-leila-wa-leila-hurghada/?q=%7b%22Bgn%22%3a%2218.09.2022%22%2c%22End%22%3a%2218.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22Gu%2b8%2fcHSVET7tunOOeSZphBH6dLJ82qYVrugkXZxtFplWsiKpBv0QAAXVJ7hMbE%2bkNe6Wv1nfzLJWvPKS8%2bVGYfRqUeeUlqV2SepTMzFCNvodkgStoWTNLhuxj2RM6d%2bVKqaU0xAkPhFW3hmorQlbetmyBUuhuu0Tph8obAES28%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/46/637356880339954118.jpg')">
+								<div is="hotel-stars" class="trait" data-category="4 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ALI BABA PALACE</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">11.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">69 009</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/ali-baba-palace-hurghada/?q=%7b%22Bgn%22%3a%2211.09.2022%22%2c%22End%22%3a%2211.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22S4n502xN04jsVyB3KnnRjD5pHiYVKbxF9mJOrBLgjt5WYYdB80H2kWbp6bcdNXZ%2bG4e3V6YrWnd%2b9f6brsUPXvT5cbEXCAsIfup6Q9YwCpTqvpFW3cp9%2bJv1t%2bCE9a5yRd6QRf6CrWDKq29%2fpTk%2bfg%3d%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/140/636794473054521819.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">SHERATON SHARM HOTEL,RESORT &amp; VILLAS</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">10.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">69 527</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/sheraton-sharm-hotelresort-villas-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2210.09.2022%22%2c%22End%22%3a%2210.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%228kxCZjOISXHCzO%2biik9a2Z7abkOCb4mHKHoPkWNV6BAr5cxD1RQg8db29wL7%2buqdihF8jn9C4VKk1Yx%2fpOnxBKP9Zlh%2bOGBU8OA%2fvL0u3RgNr0pdgr5v9X8W%2fUG4xsvsb%2bqTSD%2f1CvGvVS3wv7tGAvviRfKkMG5to8uuNClSTGtrpozIeD4w3frYacfZrA49%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/13318/637177306932094862.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">OTIUM FAMILY AMPHORAS BEACH RESORT</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">16.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">70 045</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/otium-family-amphoras-beach-resort-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2216.09.2022%22%2c%22End%22%3a%2216.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22xKWlMv%2brrAWsBZkWkonR2aPbKWwOTsoA%2fdK0dsOJd2Jh9DLvKeraTur1aGF6m%2fx%2fs6sv3Ml1TtQz1vUHVuBDWfUUmj%2byU1dkGtu%2fvdfAE7uLd%2fQN1V%2fvwSpQeXxw9KBDQUItRqlafm9AnYG4ENrpYUPiRYOlpkXvQs5jDD9UJ1%2b%2fGngIFs8AWY83cH262fWN%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/10793/636973165716918528.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">CARIBBEAN WORLD RESORT SOMA BAY</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">11.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">73 155</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/caribbean-world-resort-soma-bay-hurghada/?q=%7b%22Bgn%22%3a%2211.09.2022%22%2c%22End%22%3a%2211.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22djVumwmR6w5HnphfLpgJ%2bcWCzlvasg9mXsSMppUFQ5SDvgL8V2i0VFSi6hN3Efy5ODPyXztWDcnrqBQa0FwmIITtIm5J5pH0di75XrxsUDyEQw5o%2b3nD4x%2b1yARkaI6aRMaeegk1%2bhZ2luxUhdcTfPuvImCibhGyYnd3rFtKsngsHmn3nLfFeMPUw7E02hTd%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/114/637533210681290781.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ALBATROS LAGUNA BEACH</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">18.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">74 709</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/albatros-laguna-beach-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2218.09.2022%22%2c%22End%22%3a%2218.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22l6TTftuXJqbmqvns3NddOj7rxCrt0LHPnVJewkFh5tvoaC7XaHifxAzTsg%2f2mXn1k5uZuc3U7lLqZ06ZIwl8gpevxa8qyDSiOTE0AF4It8WROA56ujT5FnwaNSX1dq1goZpQX8pYop77XaPSIozY5uiWNAptoBL2sehWuANMDxQ%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/19943/637626408874328914.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ALBATROS ROYAL MODERNA</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">09.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">74 709</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/albatros-royal-moderna-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2209.09.2022%22%2c%22End%22%3a%2209.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22bm5yiggK7Nch4LdaQReCHvfd%2b%2fNrkFJR0FX7s0Ec6V6VMr1S5ecZinVawLbmHO%2fpglZHIt27bmaYBPy%2biC%2bMVPvbtb2quaNNmlGSuuXMy1rnl1PK6prtAjHsAk8d%2fJo9c1KvMQMHfoCoBpP6uvRHvFtxneNYO6PGuS44pd4SGSE%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Шарм-эль-Шейх">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/9965/637302435625858808.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">CONCORDE EL SALAM FRONT AREA</h3>
+								<h4 class="location">Шарм-эль-Шейх</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">11.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">77 301</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/concorde-el-salam-front-area-sharm-el-sheikh/?q=%7b%22Bgn%22%3a%2211.09.2022%22%2c%22End%22%3a%2211.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22aEmxyVOvvmtR4gb4%2bqpawlx8HmTkOEGhWrRpzOiOkzxtosaBL9vTTupjAbBEZ5Hu1YXhS%2ftmEH2pEFj8yLwmmHttIey3l2%2bVXM25WmWkcaTswXiOl6Xy7rlc2l%2fBwSxHF83og7HfSPKRReBNHxTmJu4KeRMAEp70tONOU0oufFk%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/103/636461815985984289.JPG')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">SENTIDO PALM ROYALE SOMA BAY RESORT</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">11.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Полупансион</span> </span>
+								</div>
+								<div class="price-info from rur per-person">78 337</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/sentido-palm-royale-soma-bay-resort-hurghada/?q=%7b%22Bgn%22%3a%2211.09.2022%22%2c%22End%22%3a%2211.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22GEbQrlvOdLa8PZJPnmp7Jon%2fORXECnhdR%2btYJ6W8S3GP3ss%2b4LyBkC2MibCoGIMwEOvtynS%2f5MIV9d9pT9pRgfCwolOOHihvwcrgfqB1xXgiqY7kJ5y3qi3fD6PZ2ncECtOB7UwcSGmP9%2fGU5cn%2fROH0EhPhj9yL6XZbmiMzV3mF32xKuTaf7NDMgVqHxcIa%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/90/637002588168183374.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ALBATROS CITADEL RESORT SAHL HASHEESH</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">11.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">83 001</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/albatros-citadel-resort-sahl-hasheesh-hurghada/?q=%7b%22Bgn%22%3a%2211.09.2022%22%2c%22End%22%3a%2211.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22Hsz4zFpOVk8t3415rwRATDz4vJnXWusABla%2b8PD56qRkgys8CZdW4eX0atk3zuD0v3NwbW9qC1WDWD0QuEKaG1Dus7wio70eGAKfK57CSREX12%2f1ohtr4uGm4TYUYHiuQDKVHKwiB8zZ4%2feT4yKxgqG1ieCC2tNe4IygsX1cagjvQz22XAXfIpTh9uu8lI9u%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/19936/637371648993926071.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">ALBATROS PALACE RESORT</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">18.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">85 593</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/albatros-palace-resort-hurghada/?q=%7b%22Bgn%22%3a%2218.09.2022%22%2c%22End%22%3a%2218.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22NzHcr7ameoRpjDARK2xf7BkET75U8pxFTATwRsTGTwoISOYJzGt5Y2DtHP7RmKzxvAjn5P8qEaaKQrp15PSacwUp3L1hx8T6BpPc%2b7Hg3i8wxzRYq0sAHsKwXdzeF7DxNwggSUMj96WBqdoTVM4sM3o2Z4LfsgLA9PJZrgzIZs4%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/4078/636995827932793720.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">SUNRISE MAMLOUK PALACE RESORT</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">14.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">100 103</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/sunrise-mamlouk-palace-resort-hurghada/?q=%7b%22Bgn%22%3a%2214.09.2022%22%2c%22End%22%3a%2214.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22ReMcXpqxhsAgLZZdLcymh8GeCNdlookHGnvrV8of1HSQSsbuIL5hDEoAhTc%2b1rf6YW6tY%2fJ6TlFDrHsczpQ8k37vy1%2f2yjElvqmWHx3DABgUzpnKlMkAxWi9EPDCbmf95fKi3JSE%2bG2eyO1kDncgl8S5THpi2Esfci4tx0%2fCYto%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-cell" data-group="Хургада">
+						<div class="pad">
+							<div class="visual" style="background-image: url('https://content.sunmar.ru/resize/800x600/media/image/12/49757/637889872062355656.jpg')">
+								<div is="hotel-stars" class="trait" data-category="5 *"><span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span> <span class="star"> </span></div>
+							</div>
+							<div class="info">
+								<h3 class="name">XANADU MAKADI BAY</h3>
+								<h4 class="location">Хургада</h4>
+								<div class="terms">
+									<span class="term-badge depart-from"> <span class="icon"></span><span class="label">Москва</span> </span> <span class="term-badge depart-date"> <span class="icon"></span><span class="label">08.09.22</span> </span> <span class="term-badge accomodation"> <span class="icon">7</span><span class="label">ночей</span> </span>
+									<span class="term-badge meal"> <span class="icon"></span><span class="label">Ультра Все Включено</span> </span>
+								</div>
+								<div class="price-info from rur per-person">106 452</div>
+								<div class="actions">
+									<a
+										href="https://www.sunmar.ru/hotels/egypt/xanadu-makadi-bay-hurghada/?q=%7b%22Bgn%22%3a%2208.09.2022%22%2c%22End%22%3a%2208.09.2022%22%2c%22Dr%22%3a%220%22%2c%22Acc%22%3a%227%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%22sXznLrzidXE9s55%2b7ipvpu9btm8piKrWpUtZu5o9E%2bdZKot64loAIhmNVW0F%2fCI%2faPuXK37WfTHG%2ffHHtt%2bRfiMg%2fdKQgFeXAxEswvdccuvTnNOp%2bK42qrDxUlHxGwmZqUOQhAoab4IOmPvkgtiOq5slO4zTGlV18tGBsHPzFlU%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3afalse%2c%22Srt%22%3a1%7d"
+										class="buttonlike red"
+										target="_blank"
+										rel="noopener"
+										>Выбрать тур</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				window.ASAP ||
+					(window.ASAP = (function () {
+						var callall, fns;
+						fns = [];
+						callall = function () {
+							var f, results;
+							results = [];
+							while ((f = fns.shift())) {
+								results.push(f());
+							}
+							return results;
+						};
+						if (document.addEventListener) {
+							document.addEventListener("DOMContentLoaded", callall, false);
+							window.addEventListener("load", callall, false);
+						} else if (document.attachEvent) {
+							document.attachEvent("onreadystatechange", callall);
+							window.attachEvent("onload", callall);
+						}
+						return function (fn) {
+							fns.push(fn);
+							if (document.readyState === "complete") {
+								return callall();
+							}
+						};
+					})());
+
+				window.log ||
+					(window.log = function () {
+						if (window.console && window.DEBUG) {
+							if (typeof console.group === "function") {
+								console.group(window.DEBUG);
+							}
+							if (arguments.length === 1 && Array.isArray(arguments[0]) && console.table) {
+								console.table.apply(window, arguments);
+							} else {
+								console.log.apply(window, arguments);
+							}
+							return typeof console.groupEnd === "function" ? console.groupEnd() : void 0;
+						}
+					});
+
+				window.trouble ||
+					(window.trouble = function () {
+						var ref;
+						if (window.console) {
+							if (window.DEBUG) {
+								if (typeof console.group === "function") {
+									console.group(window.DEBUG);
+								}
+							}
+							if ((ref = console.warn) != null) {
+								ref.apply(window, arguments);
+							}
+							if (window.DEBUG) {
+								return typeof console.groupEnd === "function" ? console.groupEnd() : void 0;
+							}
+						}
+					});
+
+				window.preload ||
+					(window.preload = function (what, fn) {
+						var lib;
+						if (!Array.isArray(what)) {
+							what = [what];
+						}
+						return $.when
+							.apply(
+								$,
+								(function () {
+									var j, len, results;
+									results = [];
+									for (j = 0, len = what.length; j < len; j++) {
+										lib = what[j];
+										results.push(
+											$.ajax(lib, {
+												dataType: "script",
+												cache: true,
+											})
+										);
+									}
+									return results;
+								})()
+							)
+							.done(function () {
+								return typeof fn === "function" ? fn() : void 0;
+							});
+					});
+
+				window.queryParam ||
+					(window.queryParam = function (p, nocase) {
+						var k, params, params_kv;
+						params_kv = location.search.substr(1).split("&");
+						params = {};
+						params_kv.forEach(function (kv) {
+							var k_v;
+							k_v = kv.split("=");
+							return (params[k_v[0]] = k_v[1] || "");
+						});
+						if (p) {
+							if (nocase) {
+								for (k in params) {
+									if (k.toUpperCase() === p.toUpperCase()) {
+										return decodeURIComponent(params[k]);
+									}
+								}
+								return void 0;
+							} else {
+								return decodeURIComponent(params[p]);
+							}
+						}
+						return params;
+					});
+
+				ASAP(function () {
+					var $ctx, libs;
+					libs = ["https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"];
+					$ctx = $("#hotels-set");
+					$ctx = $('[data-component-instance="0cbc6286-1b02-47a3-90b4-35eb188eba8c"]');
+
+					preload(libs, function () {
+						var $grid, group2select, initial_selector;
+						initial_selector = "*";
+						if ((group2select = $(".group-filters > *.selected", $ctx).attr("data-group"))) {
+							initial_selector = group2select !== "*" ? "[data-group*='" + group2select + "']" : "*";
+						}
+						$grid = $(".cards-grid", $ctx)
+							.on("layoutComplete", function (e, items) {
+								var by_top, els, max_height, results, row, t, tallest_item;
+								els = items.map(function (i) {
+									return i.element;
+								});
+								by_top = _.groupBy(els, function (el) {
+									return $(el).css("top");
+								});
+								results = [];
+								for (t in by_top) {
+									row = by_top[t];
+									tallest_item = _.maxBy(row, function (el) {
+										return $(el).outerHeight();
+									});
+									max_height = $(tallest_item).outerHeight();
+									results.push(
+										$(row).css({
+											minHeight: max_height,
+										})
+									);
+								}
+								return results;
+							})
+							.isotope({
+								itemSelector: ".card-cell",
+								layoutMode: "fitRows",
+								stagger: 30,
+								filter: initial_selector,
+							});
+						$(".group-filters > [data-group]", $ctx).on("click", function () {
+							var $this, group, selector;
+							$this = $(this);
+							group = $this.attr("data-group");
+							selector = group !== "*" ? "[data-group*='" + group + "']" : "*";
+							$grid.find(".card-cell").css({
+								minHeight: 0,
+							});
+							$grid.isotope({
+								filter: selector,
+							});
+							return $this.addClass("selected").siblings(".selected").removeClass("selected");
+						});
+						return setTimeout(function () {
+							return $ctx.addClass("shown");
+						}, 0);
+					});
+				});
+			</script>
+
+			<div class="banner">
+				<img src="https://cdn.sunmar.ru/content/cms/russia/egypt-main/banner-bottom.png" alt="" class="banner__image desktop" />
+				<img src="https://cdn.sunmar.ru/content/cms/russia/egypt-main/banner-bottom_mobile.png" alt="" class="banner__image mobile" />
+
+				<div class="button-wrapper"></div>
+			</div>
+
+			<div class="row mt-3 mb-3">
+				<div class="col-lg-2 col-md-2 col-sm-12">
+					<p>&nbsp;</p>
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-12">
+					<a
+						title="Забронировать тур в Египет"
+						href="https://www.sunmar.ru/packagetours/moskva-to-egipet-tours/?q=%7b%22Bgn%22%3a%2201.09.2022%22%2c%22End%22%3a%2207.09.2022%22%2c%22Dr%22%3a%223%22%2c%22Acc%22%3a%227%2c8%2c9%2c10%2c11%2c12%22%2c%22Gest%22%3a%222%22%2c%22Q%22%3a%2299rj6FHeVZ33%2bg1AdCnYdpuRHt25fza%2flm1mSpq9PxAFler7T4c8noulqv0F9cPyyETodcbsunqg%2bh6w4wtByimEMRtRn1eMtmk421Vg%2fE92rNG%2b7iakKI9TVSgXOfifscunvuZmhQeQE5w6LPBjVg%3d%3d%22%2c%22Ts%22%3a0%2c%22Las%22%3afalse%2c%22AcId%22%3a0%2c%22FDate%22%3a%220001-01-01T00%3a00%3a00Z%22%2c%22Ref%22%3afalse%2c%22Pstatus%22%3afalse%2c%22TransferPrice%22%3a0.0%2c%22Chr%22%3atrue%2c%22Rglr%22%3atrue%2c%22Srt%22%3a1%7d&amp;f={%22Rh%22:false,%22Ao%22:[%22available%22]}&amp;page=1"
+						target="_blank"
+						rel="noopener"
+					>
+						<button class="metric-btn btn btn-outline-primary btn-lg btn-block" type="button">Забронировать тур</button>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-12">
+					<p>&nbsp;</p>
+				</div>
+			</div>
+		</div>
+		<script>
+			// разметка страницы метриками
+			const buttons = document.querySelectorAll(".metric-btn");
+			const tabs = document.querySelectorAll(".tab-metric");
+			buttons.forEach((btn) => {
+				btn.addEventListener("click", () => {
+					ym(215233, "reachGoal", "tourchoose_Egypt");
+				});
+			});
+			tabs.forEach((tab) => {
+				tab.addEventListener("click", () => {
+					ym(215233, "reachGoal", "tourchoose_Egypt1", { town_name: `${tab.textContent.toLowerCase()}` });
+				});
+			});
+		</script>
+	</body>
+</html>

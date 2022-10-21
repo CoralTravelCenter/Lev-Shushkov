@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: gainsboro;
+}
+
+.gallery-layout {
+  margin: 50px;
+  position: relative;
+  width: 670px;
+  height: 502px;
+  background: url(https://content.coral.ru/resize/800x600/media/image/1/983/637811359374363278.jpg);
+}
+
+.plate-bonus {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  position: absolute;
+  top: 150px;
+  left: -8px;
+  width: 200px;
+  height: 60px;
+}
+.plate-bonus::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #947d30;
+  left: 0;
+  top: 59px;
+  position: absolute;
+  box-shadow: none;
+  transform: rotate(225deg);
+}
+@media screen and (max-width: 499px) {
+  .plate-bonus::before {
+    top: 22px;
+  }
+}
+@media screen and (max-width: 499px) {
+  .plate-bonus {
+    height: 23px;
+    width: 135px;
+  }
+}
+
+.plate-bonus__text {
+  display: flex;
+  flex-direction: column;
+  font-family: "Rubik";
+  font-style: normal;
+  margin: 0 0 0 20px;
+  width: 95px;
+}
+@media screen and (max-width: 499px) {
+  .plate-bonus__text {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.plate-bonus__title {
+  color: #e2320f;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+  margin-bottom: 1px;
+}
+@media screen and (max-width: 499px) {
+  .plate-bonus__title {
+    font-size: 10px;
+    line-height: 12px;
+    min-width: -webkit-fit-content;
+    min-width: -moz-fit-content;
+    min-width: fit-content;
+    margin-right: 4px;
+  }
+}
+
+.plate-bonus__description {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  margin-bottom: 0;
+}
+@media screen and (max-width: 499px) {
+  .plate-bonus__description {
+    font-size: 7px;
+    line-height: 8px;
+  }
+}
+
+.plate-bonus_image {
+  -o-object-position: 0 -1px;
+     object-position: 0 -1px;
+  position: absolute;
+  right: -23px;
+}
+@media screen and (max-width: 499px) {
+  .plate-bonus_image {
+    display: none;
+  }
+}
